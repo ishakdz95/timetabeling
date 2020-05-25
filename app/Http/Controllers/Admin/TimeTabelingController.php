@@ -43,74 +43,49 @@ class TimeTabelingController extends Controller
         $i=0;
         $j=0;
 
+        $r=0;
 
-        foreach ($days as $day){
-        $column='day: '.$day->name;
 
-            foreach ($day->timeslots as $timeslot) {
-                $p=0;
-                $c=0;
-                $r=0;
-                $g=0;
-                $bool=1;
-                if (empty($list_professor)==true) {
-                    foreach ($professors as $professor) {
-                        $list_professor[$p] = $professor->first_name . ' ' . $professor->last_name;
-                        $p++;
-                    }
-                }
-                if(empty($list_rooms)==true){
-                    foreach ($rooms as $room){
-                        $list_rooms[$r]=$room->code;
-                        $r++;
-                    }
-                }
-                if (empty($list_courses)==true){
-                    foreach ($courses as $cours){
-                        $list_courses[$c]=$cours->name;
-                        $c++;
-                    }
-                }
-                if (empty($list_groups)==true)
-                {
-                    foreach ($groups as $group)
-                    {
-                        $list_groups[$g]=$group->name;
-                        $g++;
-                    }
-                }
+        foreach ($rooms as $room)
+        {
+            $list_rooms[$r]=$room->code;
+            $r++;
+        }
 
-                    $column = $column . 'T: ' . $timeslot->name . ' ';
-                while ($bool==1) {
-                    if (empty($list_rooms) == false) {
-                        $column =$column. 'R: ' . $list_rooms[0] . ' ';
-                    }
-                    if (empty($list_professor) == false) {
-                        $column =$column. 'P: ' . $list_professor[0] . ' ';
-                    }
-                    if (empty($list_courses) == false) {
-                        $column =$column. 'Cours: ' . $list_courses[0]. ' ';
-                    }
-                    if (empty($list_groups)== false){
-                        $column=$column. 'Group: '.$list_groups[0]. ' ';
-                    }
-                    $table[$j] = $column;
-                    $column = '';
-                    $j++;
-                    array_shift($list_courses);
+        foreach ($professors as $professor){
+            $t=0;
+            $column='P:'.$professor->first_name.' ';
+
+            foreach ($days as $day){
+                foreach ($day->timeslots as $timeslot){
+                    $timeslotname[$t]=$timeslot->name;
+                    $t++;
+                }
+            }
+
+            foreach ($courses as $cours)
+            {
+
+                $booltime=1;
+                $boolroom=1;
+                $column=$column.'C: '.$cours->name.' ';
+                while ($booltime==1 && empty($timeslotname)!=true){
+                    $column=$column.$timeslotname[0].' ';
+                    $booltime=0;
+                    array_shift($timeslotname);
+                }
+                while ($boolroom==1 && empty($list_rooms)!=true){
+                    $column=$column.$list_rooms[0].' ';
+                    $boolroom=0;
                     array_shift($list_rooms);
-                    array_shift($list_professor);
-                    array_shift($list_groups);
-                    if (empty($list_professor)==true || empty($list_courses)==true || empty($list_rooms)==true || empty($list_groups)==true){
-                        $bool=0;
-                    }
-
                 }
 
             }
-
+            $table[$i]=$column;
+            $i++;
         }
         dd($table);
+
 
         return view('admin.timetabelings.index',compact('days'));
     }
