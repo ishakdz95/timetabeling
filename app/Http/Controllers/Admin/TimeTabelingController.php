@@ -101,7 +101,9 @@ class TimeTabelingController extends Controller
                     array_shift($list_rooms);
                     array_shift($list_professor);
                     array_shift($list_groups);
-
+                    if (empty($list_professor)==true || empty($list_courses)==true || empty($list_rooms)==true || empty($list_groups)==true){
+                        $bool=0;
+                    }
 
                 }
 
