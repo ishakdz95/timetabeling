@@ -19,6 +19,7 @@
                         @forelse($timeslots as $timeslot)
                             <tr>
                                 <td class="text-light">{{$timeslot->name}}</td>
+                                <td class="text-light">{{$timeslot->day->name}}</td>
 
                                 <td><a href="{{route('admin.timeslots.edit',$timeslot->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.timeslots.destroy',$timeslot->id)}}">

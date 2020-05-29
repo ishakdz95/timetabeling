@@ -72,7 +72,8 @@ class TimeslotController extends Controller
      */
     public function edit(Timeslot $timeslot)
     {
-        return view('admin.timeslots.edit',compact('timeslot'));
+       $days=Day::all();
+        return view('admin.timeslots.edit',compact('timeslot','days'));
     }
 
     /**

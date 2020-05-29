@@ -13,6 +13,13 @@
                        @csrf
                        <label class="text-light">TimeSlot:</label>
                        <input type="text" name="name" value="{{$timeslot->name}}" class="form-control"/>
+                       <label class="text-light">Day:</label>
+                       <select class="form-control " name="day_id">
+                           @foreach($days as $day)
+                               <option value="{{$day->id}}">{{$day->name}}</option>
+                           @endforeach
+
+                       </select>
                        <br/><br/>
                        <input type="submit" value="Save" class="btn btn-green"/>
                    </form>

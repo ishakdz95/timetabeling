@@ -19,6 +19,7 @@
                            <option value="14:00-15:30">14:00-15:30</option>
                            <option value="15:30-17:00">15:30-17:00</option>
                        </select>
+                       <label class="text-light">Day:</label>
                         <select class="form-control " name="day_id">
                             @foreach($days as $day)
                                 <option value="{{$day->id}}">{{$day->name}}</option>
