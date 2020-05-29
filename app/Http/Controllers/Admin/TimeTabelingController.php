@@ -45,7 +45,6 @@ class TimeTabelingController extends Controller
 
         $r=0;
 
-
         foreach ($rooms as $room)
         {
             $list_rooms[$r]=$room->code;
@@ -79,7 +78,14 @@ class TimeTabelingController extends Controller
                     $boolroom=0;
                     array_shift($list_rooms);
                 }
-
+                if (empty($list_rooms)){
+                    $r=0;
+                    foreach ($rooms as $room)
+                    {
+                        $list_rooms[$r]=$room->code;
+                        $r++;
+                    }
+                }
             }
             $table[$i]=$column;
             $i++;
