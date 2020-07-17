@@ -11,22 +11,11 @@
                     <br><br><br>
 
                     <table class="table">
-                        @foreach($days as $day)
-                            <tr>
-                                <td class="text-light">{{$day->name}}</td>
-                                <td class="text-light">
-                                    @foreach($day->timeslots as $timeslot)
-                                        {{$timeslot->name}} ----
-                                    @endforeach
-                                </td>
-                            </tr>
-
-                        @endforeach
 
                     </table>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
 @endsection

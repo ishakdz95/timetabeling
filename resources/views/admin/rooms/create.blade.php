@@ -16,9 +16,6 @@
                        <div type="hidden">
                        <label class="text-light">Available:</label>
                        <input type="hidden" id="available" name="available" value="1" >
-                       <label class="text-light" for="available">available</label>
-                       <input type="radio" id="available" name="available" value="0">
-                       <label class="text-light" for="not_available">not available</label>
                        </div>
                        <br/><br/>
                        <input type="submit" value="save" class="btn btn-green"/>

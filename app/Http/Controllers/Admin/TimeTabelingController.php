@@ -8,6 +8,7 @@ use App\Group;
 use App\Http\Controllers\Controller;
 use App\Professor;
 use App\Room;
+use App\Timeslot;
 use App\TimeTabeling;
 use Illuminate\Http\Request;
 
@@ -21,107 +22,35 @@ class TimeTabelingController extends Controller
      */
     public function index()
     {
-
-        $days=Day::all();
-        $dayname=[];
+        $timetabling=new TimeTabeling();
         $professors=Professor::all();
-        $list_professor=[];
-        $tests=Professor::all();
-        $list_professor=[];
-        $professor_name='';
-        $rooms=Room::all();
-        $list_rooms=[];
-        $room_code='';
-        $groups=Group::all();
-        $courses=Course::all();
-        $list_courses=[];
-        $column='';
-        $room_code='';
-        $dayname=[];
-        $table=[];
-        $timeslotname=[];
+        $timetabling->dettach_rooom_timeslots();
+        $timetabling->intialise_rooms();
+        $timetabling->intialise_professors();
+        $timeslot=new Timeslot();
+        $groups_courses=$timetabling->cour_group();
         $i=0;
-        $j=0;
-        $c=0;
-        $g=0;
-
-        $r=0;
-
-        foreach ($rooms as $room)
-        {
-            $list_rooms[$r]=$room->code;
-            $r++;
-        }
-        foreach ($courses as $cours){
-            $list_courses[$c]=$cours->name;
-            $c++;
-        }
-        foreach ($groups as $group){
-            $list_groups[$g]=$group->name;
-            $g++;
-        }
         foreach ($professors as $professor){
-            $t=0;
-            $h=6;
-                    $column='P:'.$professor->first_name.' ';
-                    foreach ($days as $day){
-                         foreach ($day->timeslots as $timeslot){
-                            $timeslotname[$t]=$timeslot->name;
-                            $t++;
-                         }
-                    }
-                    while ($h>0)
-                        {
-                            $h--;
+            $hours=0;
+            $professor->initialise_timeslots();
+            for ($x = 0; $x <6; $x++) {
+                $available=$timetabling->professor_available($hours,$professor);
+                if($available==true){
+                    $timeslot=$professor->find_timeslot();
+                    $room=$timetabling->find_room($timeslot);
 
-                           $booltime=1;
-                           $boolroom=1;
-                           $boolgroup=1;
-                           $column=$column.'C: '.$list_courses[0].' ';
-                           array_shift($list_courses);
-                           while ($booltime==1 && empty($timeslotname)!=true){
-                           $column=$column.$timeslotname[0].' ';
-                           $booltime=0;
-                           array_shift($timeslotname);
-                            }
-                            while ($boolroom==1 && empty($list_rooms)!=true){
-                           $column=$column.$list_rooms[0].' ';
-                           $boolroom=0;
-                           array_shift($list_rooms);
-                             }
-                            while ($boolgroup==1 && empty($list_groups)!=true){
-                                $column=$column.$list_groups[0].' ';
-                                $boolgroup=0;
-                                array_shift($list_rooms);
-                            }
-                          if ($c==$r || empty($list_rooms) ){
-                            $r=0;
-                            $c=0;
-                            foreach ($rooms as $room)
-                                {
-                                $list_rooms[$r]=$room->code;
-                                $r++;
-                                }
-                          }
-                            if ( empty($list_courses) ){
-                                $r=0;
-                                $c=0;
-                                foreach ($courses as $cours)
-                                {
-                                    $list_courses[$c]=$cours->name;
-                                    $c++;
-                                }
-                            }
-
-
-
-
+                    $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
+                    $table[$i]=$professor_group_cours;
+                    $i++;
+                    $hours++;
+                    array_shift($groups_courses);
+                }
             }
-            $table[$i]=$column;
-            $i++;
-        }
-        dd($table);
 
+        }
+
+
+        dd($table);
 
         return view('admin.timetabelings.index',compact('days'));
     }

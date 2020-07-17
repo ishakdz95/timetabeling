@@ -19,6 +19,7 @@ class CreateProfessorsTable extends Migration
             $table->string('last_name');
             $table->string('grade');
             $table->string('sex');
+            $table->boolean('available');
             $table->string('hour')->default('6');
             $table->timestamps();
         });

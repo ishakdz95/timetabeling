@@ -25,6 +25,10 @@
                        <label class="text-light" for="male">Male</label>
                        <input type="radio" id="female" name="sex" value="female">
                        <label class="text-light" for="female">Female</label>
+                       <div type="hidden">
+                           <label class="text-light">Available:</label>
+                           <input type="hidden" id="available" name="available" value="1" >
+                       </div>
                        <br/><br/>
                        <input type="submit" value="save" class="btn btn-green"/>
 

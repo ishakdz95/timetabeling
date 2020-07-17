@@ -16,6 +16,7 @@ class CreateTimeslotsTable extends Migration
         Schema::create('timeslots', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->boolean('available');
             $table->unsignedBigInteger('day_id');
             $table->foreign('day_id')->references('id')->on('days');
             $table->timestamps();

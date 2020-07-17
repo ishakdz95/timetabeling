@@ -17,8 +17,6 @@ class TimeslotController extends Controller
      */
     public function index()
     {
-
-
         $timeslots=Timeslot::all();
         return view('admin.timeslots.index',compact('timeslots'));
     }
@@ -47,6 +45,7 @@ class TimeslotController extends Controller
             $data = new Timeslot([
                 'day_id'=>$request->get('day_id'),
                 'name'=>$request->get('name'),
+                'available'=>$request->get('available'),
             ]);
             $data->save();
         /*Timeslot::create($request->all());*/

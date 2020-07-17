@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Timeslot extends Model
 {
-    protected $fillable=['name','day_id'];
+    protected $fillable=['name','day_id','available'];
 
 
     public function courses()
@@ -31,4 +31,7 @@ class Timeslot extends Model
     {
         return $this->belongsTo(Day::class);
     }
+
+
+
 }
