@@ -27,6 +27,8 @@ class TimeTabelingController extends Controller
         $timetabling->dettach_rooom_timeslots();
         $timetabling->intialise_rooms();
         $timetabling->intialise_professors();
+        $timetabling->dettach_group_course();
+
         $timeslot=new Timeslot();
         $groups_courses=$timetabling->cour_group();
         $i=0;

@@ -19,7 +19,7 @@ class TimeTabeling extends Model
             foreach ($courses as $cours){
                 $cours_year=$cours->year->name;
                 if($group_year==$cours_year){
-
+                    $group->courses()->attach($cours);
                     $group_cours=$group_year.' '.$group->name.' '.$cours->name;
                     $group_courses[$i]=$group_cours;
                     $i++;
@@ -71,6 +71,13 @@ class TimeTabeling extends Model
             $room->available=true;
             $room->save();
         }
+    }
+    public function dettach_group_course(){
+        $groups=Group::all();
+        foreach ($groups as $group){
+            $group->courses()->detach();
+        }
+
     }
 
 }
