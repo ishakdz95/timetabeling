@@ -44,6 +44,7 @@ class TimeTabelingController extends Controller
 
                         $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
                         $table[$i]=$professor_group_cours;
+
                         $i++;
                         $hours++;
                         array_shift($groups_courses);
