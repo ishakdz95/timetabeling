@@ -19,13 +19,12 @@ class TimeTabeling extends Model
             foreach ($courses as $cours){
                 $cours_year=$cours->year->name;
                 if($group_year==$cours_year){
-                    //$group->courses()->attach($cours);
+                    $group->courses()->attach($cours);
                     $group_cours=$group_year.' '.$group->name.' '.$cours->name;
                     $group_courses[$i]=$group_cours;
                     $i++;
                 }
             }
-
         }
         return $group_courses;
     }
@@ -54,9 +53,15 @@ class TimeTabeling extends Model
         }
     }
     public function dettach_rooom_timeslots(){
-        $rooms=Room::all();
-        foreach ($rooms as $room){
-            $room->timeslots()->detach();
+         $rooms=Room::all();
+            foreach ($rooms as $room){
+               $room->timeslots()->detach();
+             }
+         }
+    public function dettach_professor_timeslots(){
+        $professros=Professor::all();
+        foreach ($professros as $professor){
+            $professor->timeslots()->detach();
         }
     }
     public function intialise_rooms(){

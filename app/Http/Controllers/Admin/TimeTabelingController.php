@@ -24,7 +24,10 @@ class TimeTabelingController extends Controller
     {
         $timetabling=new TimeTabeling();
         $professors=Professor::all();
+        $groups=Group::all();
+        $days=Day::all();
         $timetabling->dettach_rooom_timeslots();
+        $timetabling->dettach_professor_timeslots();
         $timetabling->intialise_rooms();
         $timetabling->intialise_professors();
         $timeslot=new Timeslot();
@@ -40,26 +43,20 @@ class TimeTabelingController extends Controller
                 $available=$timetabling->professor_available($hours,$professor);
                 if($available==true){
                     $timeslot=$professor->find_timeslot();
+                    $professor->timeslots()->attach($timeslot);
                     $room=$timetabling->find_room($timeslot);
-
-                        $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
-                        $table[$i]=$professor_group_cours;
-
-                        $i++;
-                        $hours++;
-                        array_shift($groups_courses);
-                    $x++;
-
-
+                        $group=$groups->first();
+                            $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
+                            $table[$i]=$professor_group_cours;
+                            $i++;
+                            $hours++;
+                            array_shift($groups_courses);
+                            $x++;
                 }
             }
-
         }
-
-
         dd($table);
-
-        return view('admin.timetabelings.index',compact('days'));
+        return view('admin.timetabelings.index',compact('days','table'));
     }
 
     /**
