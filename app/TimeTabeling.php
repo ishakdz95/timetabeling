@@ -19,7 +19,7 @@ class TimeTabeling extends Model
             foreach ($courses as $cours){
                 $cours_year=$cours->year->name;
                 if($group_year==$cours_year){
-                    $group->courses()->attach($cours);
+                    //$group->courses()->attach($cours);
                     $group_cours=$group_year.' '.$group->name.' '.$cours->name;
                     $group_courses[$i]=$group_cours;
                     $i++;
@@ -50,12 +50,6 @@ class TimeTabeling extends Model
             if($room->timeslots()->find($timeslot->id)==null){
                 $room->timeslots()->attach($timeslot);
                 return $room;
-            }
-            else{
-                if ($room->timeslots()->find($timeslot->id)->code==$room->code){
-                    $room->timeslots()->attach($timeslot);
-                    return $room;
-                }
             }
         }
     }

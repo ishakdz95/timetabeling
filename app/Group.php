@@ -15,8 +15,4 @@ class Group extends Model
     public function year(){
         return $this->belongsTo(Year::class);
     }
-    public function courses()
-    {
-        return $this->belongsToMany(Course::class);
-    }
 }

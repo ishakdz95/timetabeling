@@ -27,25 +27,29 @@ class TimeTabelingController extends Controller
         $timetabling->dettach_rooom_timeslots();
         $timetabling->intialise_rooms();
         $timetabling->intialise_professors();
-        $timetabling->dettach_group_course();
-
         $timeslot=new Timeslot();
         $groups_courses=$timetabling->cour_group();
+
+
         $i=0;
         foreach ($professors as $professor){
             $hours=0;
             $professor->initialise_timeslots();
-            for ($x = 0; $x <6; $x++) {
+            $x=0;
+            while ( $x <6 && $groups_courses!=null) {
                 $available=$timetabling->professor_available($hours,$professor);
                 if($available==true){
                     $timeslot=$professor->find_timeslot();
                     $room=$timetabling->find_room($timeslot);
 
-                    $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
-                    $table[$i]=$professor_group_cours;
-                    $i++;
-                    $hours++;
-                    array_shift($groups_courses);
+                        $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
+                        $table[$i]=$professor_group_cours;
+                        $i++;
+                        $hours++;
+                        array_shift($groups_courses);
+                    $x++;
+
+
                 }
             }
 
