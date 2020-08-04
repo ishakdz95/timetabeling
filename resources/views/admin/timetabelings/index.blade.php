@@ -22,8 +22,8 @@
                         </tr>
                         <tr class="text-light">
 
-                            @forelse($table as $column)
-                                    <td> {{$column}}</td>
+                            @forelse($timeslots as $timeslot)
+                                    <td> {{$timeslot->courses->first()->name}}</td>
                                 @empty
 
                                 @endforelse

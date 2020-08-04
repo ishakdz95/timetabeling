@@ -26,12 +26,13 @@ class TimeTabelingController extends Controller
         $professors=Professor::all();
         $groups=Group::all();
         $days=Day::all();
+        $timeslots=Timeslot::all();
         $timetabling->dettach_rooom_timeslots();
         $timetabling->dettach_professor_timeslots();
         $timetabling->intialise_rooms();
         $timetabling->intialise_professors();
         $timeslot=new Timeslot();
-        $groups_courses=$timetabling->cour_group();
+        $seances=$timetabling->cour_group();
 
 
         $i=0;
@@ -39,24 +40,28 @@ class TimeTabelingController extends Controller
             $hours=0;
             $professor->initialise_timeslots();
             $x=0;
-            while ( $x <6 && $groups_courses!=null) {
+            while ( $x <6 && $seances!=null) {
                 $available=$timetabling->professor_available($hours,$professor);
                 if($available==true){
+
                     $timeslot=$professor->find_timeslot();
                     $professor->timeslots()->attach($timeslot);
                     $room=$timetabling->find_room($timeslot);
-                        $group=$groups->first();
-                            $professor_group_cours=$professor->first_name.' '.$groups_courses[0].' '.$timeslot->name.''.$room->code;
+                    $timetabling->attach_cours_timeslot($seances[0]->cours_id,$timeslot);
+                    $timetabling->attach_groups_timeslot($seances[0]->group_id,$timeslot);
+                    //dd($seances[0]->group_id);
+                    dd($groups->find($seances[0]->group_id)->name);
+                            $professor_group_cours=$professor->first_name.' '.$timeslot->name.''.$room->code;
                             $table[$i]=$professor_group_cours;
                             $i++;
                             $hours++;
-                            array_shift($groups_courses);
+                            array_shift($seances);
                             $x++;
                 }
             }
         }
-        dd($table);
-        return view('admin.timetabelings.index',compact('days','table'));
+
+        return view('admin.timetabelings.index',compact('days','timeslots'));
     }
 
     /**

@@ -7,27 +7,37 @@ use Illuminate\Database\Eloquent\Model;
 class TimeTabeling extends Model
 {
     public function cour_group(){
+
         $groups=Group::all();
         $courses=Course::all();
-        $group_courses[]=[];
-        $group_cours='';
+
+
+        $courses_names[]=[];
+        $groups_names[]=[];
+        $seances=array();
+        $cours_name='';
+        $group_name='';
         $group_year='';
         $cours_year='';
-        $i=0;
+        $id=0;
         foreach ($groups as $group){
             $group_year=$group->year->name;
             foreach ($courses as $cours){
                 $cours_year=$cours->year->name;
                 if($group_year==$cours_year){
                     $group->courses()->attach($cours);
-                    $group_cours=$group_year.' '.$group->name.' '.$cours->name;
-                    $group_courses[$i]=$group_cours;
-                    $i++;
+                    $seance=new Seance();
+                    $seance->group_id=$group->id;
+                    $seance->cours_id=$cours->id;
+                    $seances[$id]=$seance;
+                    $id++;
                 }
             }
         }
-        return $group_courses;
+
+        return $seances;
     }
+
     public function professor_available(int $a,Professor $professor){
         if ($a>=6){
             $professor->available=false;
@@ -78,5 +88,26 @@ class TimeTabeling extends Model
         }
 
     }
+    public function attach_cours_timeslot(string $cours_id,Timeslot $timeslot)
+    {
+        $courses = Course::all();
+        foreach ($courses as $cours) {
+
+            if ($cours->id == $cours_id) {
+                $cours->timeslots()->attach($timeslot);
+            }
+
+        }
+    }
+    public function attach_groups_timeslot(string $group_id,Timeslot $timeslot){
+        $groups=Group::all();
+        foreach ($groups as $group) {
+            if ($group->id == $group_id) {
+                $group->timeslots()->syncWithoutDetaching($timeslot);
+
+            }
+        }
+    }
+
 
 }
