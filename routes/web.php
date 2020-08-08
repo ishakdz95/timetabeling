@@ -33,5 +33,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function (){
     Route::resource('groups','Admin\GroupController');
     Route::resource('days','Admin\DayController');
     Route::resource('years','Admin\YearController');
+    Route::resource('sections','Admin\SectionController');
 });
 

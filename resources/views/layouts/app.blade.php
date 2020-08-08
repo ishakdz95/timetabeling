@@ -71,6 +71,11 @@
                              </a>
                             </li>
                             <li class="list-group-item nav-item" >
+                             <a  class="nav-link" href="{{ route('admin.sections.index') }}">
+                                 Sections
+                             </a>
+                             </li>
+                            <li class="list-group-item nav-item" >
                               <a  class="nav-link" href="{{ route('admin.groups.index') }}">
                                   Groups
                               </a>
