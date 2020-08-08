@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\section;
+use App\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -26,7 +27,8 @@ class SectionController extends Controller
      */
     public function create()
     {
-        return view('admin.sections.create');
+        $years=Year::all();
+        return view('admin.sections.create',compact('years'));
     }
 
     /**

@@ -6,5 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class section extends Model
 {
-    protected $fillable=['name'];
+    protected $fillable=['name','year_id'];
+    public function year(){
+        return $this->belongsTo(Year::class);
+    }
 }

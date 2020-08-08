@@ -13,12 +13,16 @@
                     <table class="table">
                         <tr>
                             <th class="text-light">Section name</th>
+                            <th class="text-light">Year</th>
                             <th></th>
                             <th></th>
                         </tr>
                         @forelse($sections as $section)
                             <tr>
                                 <td class="text-light">{{$section->name}}</td>
+                                <td class="text-light">
+                                    {{$section->year->name}}
+                                </td>
                                 <td><a href="{{route('admin.sections.edit',$section->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.sections.destroy',$section->id)}}">
                                         @csrf
