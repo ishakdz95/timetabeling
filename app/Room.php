@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillable=['code','available'];
+    protected $fillable=['code','available','type'];
 
     public function timeslots()
     {

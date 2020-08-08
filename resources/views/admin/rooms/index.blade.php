@@ -14,6 +14,7 @@
                         <tr>
                             <th class="text-light">Code Of Room</th>
                             <th class="text-light">Available</th>
+                            <th class="text-light">Type</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -22,6 +23,7 @@
                             <tr>
                                 <td class="text-light">{{$room->code}}</td>
                                 <td class="text-light">{{$room->available}}</td>
+                                <td class="text-light">{{$room->type}}</td>
 
                                 <td><a href="{{route('admin.rooms.edit',$room->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.rooms.destroy',$room->id)}}">

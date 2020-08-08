@@ -12,9 +12,14 @@
                        @csrf
                        <label class="text-light">Code Of Room:</label>
                        <input type="text" name="code" class="form-control"/>
-                       <br/><br/>
+                       <br/>
+                       <label class="text-light">Type Of Room:</label>
+                       <select class="form-control" name="type">
+                           <option value="lecture hall">lecture hall</option>
+                           <option value="TD room">TD room</option>
+                           <option value="laboratory">laboratory</option>
+                       </select>
                        <div type="hidden">
-                       <label class="text-light">Available:</label>
                        <input type="hidden" id="available" name="available" value="1" >
                        </div>
                        <br/><br/>
