@@ -21,16 +21,7 @@
                             <th>15:30-17:00</th>
                         </tr>
                         <tr class="text-light">
-
-                            @forelse($timeslots as $timeslot)
-                                    <td> {{$timeslot->courses->first()->name}}</td>
-                                @empty
-
-                                @endforelse
                         </tr>
-
-
-
 
                     </table>
                 </div>

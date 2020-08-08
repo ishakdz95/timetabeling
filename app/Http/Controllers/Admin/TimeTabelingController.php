@@ -33,26 +33,34 @@ class TimeTabelingController extends Controller
         $timetabling->intialise_professors();
         $timeslot=new Timeslot();
         $seances=$timetabling->cour_group();
+        $table=array();
 
 
         $i=0;
         foreach ($professors as $professor){
+
+
             $hours=0;
             $professor->initialise_timeslots();
             $x=0;
             while ( $x <6 && $seances!=null) {
+                $timetabling=new TimeTabeling();
+                $timetabling->professor_id=$professor->id;
                 $available=$timetabling->professor_available($hours,$professor);
                 if($available==true){
 
                     $timeslot=$professor->find_timeslot();
+                    $timetabling->timeslot_id=$timeslot->id;
                     $professor->timeslots()->attach($timeslot);
                     $room=$timetabling->find_room($timeslot);
+                    $timetabling->room_id=$room->id;
                     $timetabling->attach_cours_timeslot($seances[0]->cours_id,$timeslot);
+                    $timetabling->cours_id=$seances[0]->cours_id;
                     $timetabling->attach_groups_timeslot($seances[0]->group_id,$timeslot);
-                    //dd($seances[0]->group_id);
-                    dd($groups->find($seances[0]->group_id)->name);
-                            $professor_group_cours=$professor->first_name.' '.$timeslot->name.''.$room->code;
-                            $table[$i]=$professor_group_cours;
+                    $timetabling->group_id=$seances[0]->group_id;
+
+                            //$professor_group_csours=$professor->first_name.' '.$timeslot->name.''.$room->code;
+                    $table[$i]=$timetabling;
                             $i++;
                             $hours++;
                             array_shift($seances);
@@ -61,7 +69,7 @@ class TimeTabelingController extends Controller
             }
         }
 
-        return view('admin.timetabelings.index',compact('days','timeslots'));
+        return view('admin.timetabelings.index',compact('days','timeslots','table'));
     }
 
     /**

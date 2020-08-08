@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class TimeTabeling extends Model
 {
+    public $group_id;
+    public $cours_id;
+    public $professor_id;
+    public $room_id;
+    public $timeslot_id;
+
     public function cour_group(){
 
         $groups=Group::all();
