@@ -16,6 +16,7 @@
                        <label class="text-light">Type Of Course:</label>
                        <select class="form-control" name="type">
                            <option value="{{$course->type}}">{{$course->type}}</option>
+
                            <option value="Cours">Course</option>
                            <option value="TD">TD</option>
                            <option value="TP">TP</option>
