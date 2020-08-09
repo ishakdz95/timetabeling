@@ -12,6 +12,13 @@
                        @csrf
                        <label class="text-light">Name Of Course:</label>
                        <input type="form-control text" name="name" class="form-control"/>
+                       <label class="text-light">Type Of Course:</label>
+                       <select class="form-control" name="type">
+                           <option value="Cours">Course</option>
+                           <option value="TD">TD</option>
+                           <option value="TP">TP</option>
+                       </select>
+
                        <label class="text-light">Year:</label>
                        <select class="form-control " name="year_id">
                            @foreach($years as $year)

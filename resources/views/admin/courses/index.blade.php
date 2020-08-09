@@ -13,6 +13,7 @@
                     <table class="table">
                         <tr>
                             <th class="text-light">Course</th>
+                            <th class="text-light">Type</th>
                             <th class="text-light">Year of course</th>
                             <th></th>
                             <th></th>
@@ -20,6 +21,7 @@
                         @forelse($courses as $course)
                             <tr>
                                 <td class="text-light">{{$course->name}}</td>
+                                <td class="text-light">{{$course->type}}</td>
                                 <td class="text-light">
                                     {{$course->year->name}}
                                 </td>

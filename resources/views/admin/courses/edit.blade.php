@@ -13,6 +13,13 @@
                        @csrf
                        <label class="text-light">Course Name:</label>
                        <input type="text" name="name" value="{{$course->name}}" class="form-control"/>
+                       <label class="text-light">Type Of Course:</label>
+                       <select class="form-control" name="type">
+                           <option value="{{$course->type}}">{{$course->type}}</option>
+                           <option value="Cours">Course</option>
+                           <option value="TD">TD</option>
+                           <option value="TP">TP</option>
+                       </select>
                        <br/><br/>
                        <input type="submit" value="Save" class="btn btn-green"/>
                    </form>

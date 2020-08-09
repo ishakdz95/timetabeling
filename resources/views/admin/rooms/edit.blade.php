@@ -15,10 +15,8 @@
                        <input type="text" name="code" value="{{$room->code}}" class="form-control"/>
                        <br/>
                        <label class="text-light">Type Of Room:</label>
-                       <label class="text-light">{{$room->type}}</label>
-                       <br/>
-                       <label class="text-light">change type of room</label>
                        <select class="form-control" name="type">
+                           <option value="{{$room->type}}">{{$room->type}}</option>
                            <option value="lecture hall">lecture hall</option>
                            <option value="TD room">TD room</option>
                            <option value="laboratory">laboratory</option>
