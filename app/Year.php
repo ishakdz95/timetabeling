@@ -13,7 +13,5 @@ class Year extends Model
     public function courses(){
         return $this->hasMany(Course::class);
     }
-    public function groups(){
-        return $this->hasMany(Group::class);
-    }
+
 }

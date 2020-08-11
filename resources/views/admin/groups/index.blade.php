@@ -13,7 +13,7 @@
                     <table class="table">
                         <tr>
                             <th class="text-light">Course</th>
-                            <th class="text-light">Year</th>
+                            <th class="text-light">Section</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -21,7 +21,7 @@
                             <tr>
                                 <td class="text-light">{{$group->name}}</td>
                                 <td class="text-light">
-                                    {{$group->year->name}}
+                                    {{$group->section->name}}
                                 </td>
                                 <td><a href="{{route('admin.groups.edit',$group->id)}}" class="btn btn-info">Edit</a><td>
                                 <form method="POST" action="{{route('admin.groups.destroy',$group->id)}}">

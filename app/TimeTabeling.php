@@ -16,6 +16,7 @@ class TimeTabeling extends Model
 
         $groups=Group::all();
         $courses=Course::all();
+        $section=section::all();
 
 
         $courses_names[]=[];
@@ -26,8 +27,9 @@ class TimeTabeling extends Model
         $group_year='';
         $cours_year='';
         $id=0;
+
         foreach ($groups as $group){
-            $group_year=$group->year->name;
+            $group_year=$group->section->year->name;
             foreach ($courses as $cours){
                 $cours_year=$cours->year->name;
                 if($group_year==$cours_year){

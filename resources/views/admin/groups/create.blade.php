@@ -13,9 +13,9 @@
                        <label class="text-light">Name Of Group:</label>
                        <input type="form-control text" name="name" class="form-control"/>
                        <label class="text-light">Year:</label>
-                       <select class="form-control " name="year_id">
-                           @foreach($years as $year)
-                               <option value="{{$year->id}}">{{$year->name}}</option>
+                       <select class="form-control " name="section_id">
+                           @foreach($sections as $section)
+                               <option value="{{$section->id}}">{{$section->name}}</option>
                            @endforeach
 
                        </select>

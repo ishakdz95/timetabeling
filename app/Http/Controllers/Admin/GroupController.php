@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Group;
 use App\Http\Controllers\Controller;
+use App\section;
 use App\Year;
 use Illuminate\Http\Request;
 
@@ -28,8 +29,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        $years=Year::all();
-        return view('admin.groups.create',compact('years'));
+        $sections=section::all();
+        return view('admin.groups.create',compact('sections'));
 
     }
 
@@ -64,7 +65,8 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('admin.groups.edit',compact('group'));
+        $sections=section::all();
+        return view('admin.groups.edit',compact('group','sections'));
     }
 
     /**

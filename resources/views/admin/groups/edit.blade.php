@@ -13,6 +13,13 @@
                        @csrf
                        <label class="text-light">Group Name:</label>
                        <input type="text" name="name" value="{{$group->name}}" class="form-control"/>
+                       <select class="form-control " name="section_id">
+                           <option value="{{$group->section->id}}">{{$group->section->name}}</option>
+                           @foreach($sections as $section)
+                               <option value="{{$section->id}}">{{$section->name}}</option>
+                           @endforeach
+
+                       </select>
                        <br/><br/>
                        <input type="submit" value="Save" class="btn btn-green"/>
                    </form>

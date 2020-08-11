@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Group extends Model
 {
-    protected $fillable=['name','year_id'];
+    protected $fillable=['name','section_id'];
 
     public function timeslots()
     {
         return $this->belongsToMany(Timeslot::class);
     }
-    public function year(){
-        return $this->belongsTo(Year::class);
+    public function section(){
+        return $this->belongsTo(section::class);
     }
     public function courses()
     {
