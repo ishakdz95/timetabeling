@@ -10,4 +10,6 @@ class Seance extends Model
 {
     public $cours_id=0;
     public $group_id=0;
+    public $section_id=0;
+    public $type='';
 }

@@ -16,7 +16,7 @@ class TimeTabeling extends Model
 
         $groups=Group::all();
         $courses=Course::all();
-        $section=section::all();
+        $sections=section::all();
 
 
         $courses_names[]=[];
@@ -27,22 +27,38 @@ class TimeTabeling extends Model
         $group_year='';
         $cours_year='';
         $id=0;
-
-        foreach ($groups as $group){
-            $group_year=$group->section->year->name;
-            foreach ($courses as $cours){
-                $cours_year=$cours->year->name;
-                if($group_year==$cours_year){
-                    $group->courses()->attach($cours);
-                    $seance=new Seance();
-                    $seance->group_id=$group->id;
-                    $seance->cours_id=$cours->id;
-                    $seances[$id]=$seance;
-                    $id++;
+        foreach ($sections as $section)
+        {
+            $section_year=$section->year->name;
+            foreach ($section->groups as $group){
+                //$group_year=$group->section->year->name;
+                foreach ($courses as $cours){
+                    $cours_year=$cours->year->name;
+                    $cours_type=$cours->type;
+                    if($section_year==$cours_year){
+                        if($cours->type=='Cours'){
+                            $seance=new Seance();
+                            $seance->section_id=$section->id;
+                            $seance->group_id=$group->id;
+                            $seance->cours_id=$cours->id;
+                            $seance->type=$cours_type;
+                            $seances[$id]=$seance;
+                            $id++;
+                        }
+                        else{
+                            //$group->courses()->attache($cours);
+                            $seance=new Seance();
+                            $seance->section_id=$section->id;
+                            $seance->group_id=$group->id;
+                            $seance->cours_id=$cours->id;
+                            $seance->type=$cours_type;
+                            $seances[$id]=$seance;
+                            $id++;
+                        }
+                    }
                 }
             }
         }
-
         return $seances;
     }
 

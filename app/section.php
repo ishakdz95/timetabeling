@@ -13,4 +13,8 @@ class section extends Model
     public function groups(){
         return $this->hasMany(Group::class);
     }
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
 }
