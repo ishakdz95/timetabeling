@@ -80,8 +80,6 @@ class TimeTabelingController extends Controller
 
             }
         }
-
-
                     return view('admin.timetabelings.index',compact('days','timeslots','table'));
     }
 
