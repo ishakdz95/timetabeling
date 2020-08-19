@@ -17,4 +17,8 @@ class section extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+    public function timeslots()
+    {
+        return $this->belongsToMany(Timeslot::class);
+    }
 }

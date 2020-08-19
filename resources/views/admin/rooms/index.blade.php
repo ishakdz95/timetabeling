@@ -24,6 +24,12 @@
                                 <td class="text-light">{{$room->code}}</td>
                                 <td class="text-light">{{$room->available}}</td>
                                 <td class="text-light">{{$room->type}}</td>
+                                <td class="text-light">
+                                    @foreach($room->timeslots as $timeslot)
+                                        {{$timeslot->name}}
+                                        {{$timeslot->day->name}}
+                                    @endforeach
+                                </td>
 
                                 <td><a href="{{route('admin.rooms.edit',$room->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.rooms.destroy',$room->id)}}">

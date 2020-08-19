@@ -25,6 +25,12 @@
                                 <td class="text-light">
                                     {{$course->year->name}}
                                 </td>
+                                <td class="text-light">
+                                    @foreach($course->timeslots as $timeslot)
+                                        {{$timeslot->name}}
+                                        {{$timeslot->day->name}}
+                                    @endforeach
+                                </td>
                                 <td><a href="{{route('admin.courses.edit',$course->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.courses.destroy',$course->id)}}">
                                         @csrf

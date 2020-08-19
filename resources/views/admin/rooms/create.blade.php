@@ -15,9 +15,9 @@
                        <br/>
                        <label class="text-light">Type Of Room:</label>
                        <select class="form-control" name="type">
-                           <option value="lecture hall">lecture hall</option>
-                           <option value="TD room">TD room</option>
-                           <option value="laboratory">laboratory</option>
+                           <option value="Cours">lecture hall</option>
+                           <option value="TD">TD room</option>
+                           <option value="TP">laboratory</option>
                        </select>
                        <div type="hidden">
                        <input type="hidden" id="available" name="available" value="1" >

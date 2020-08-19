@@ -12,15 +12,16 @@
 
                     <table class="table">
 
+
                         <tr class="text-light">
-                            <th>08:00-09:30</th>
-                            <th>09:30-11:00</th>
-                            <th>11:00-12:30</th>
-                            <th>12:30-14:00</th>
-                            <th>14:00-15:30</th>
-                            <th>15:30-17:00</th>
-                        </tr>
-                        <tr class="text-light">
+                            @forelse($table as $t)
+                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->name}}</div>
+                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->courses->find($t->cours_id)->name}}</div>
+                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->professors->find($t->professor_id)->first_name}}</div>
+                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->groups->find($t->group_id)->name}}</div>
+                            @empty
+
+                            @endforelse
                         </tr>
 
                     </table>

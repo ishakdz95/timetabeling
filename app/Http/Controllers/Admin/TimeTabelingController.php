@@ -22,54 +22,66 @@ class TimeTabelingController extends Controller
      */
     public function index()
     {
-        $timetabling=new TimeTabeling();
         $professors=Professor::all();
         $groups=Group::all();
         $days=Day::all();
         $timeslots=Timeslot::all();
-        $timetabling->dettach_rooom_timeslots();
-        $timetabling->dettach_professor_timeslots();
-        $timetabling->intialise_rooms();
-        $timetabling->intialise_professors();
-        $timeslot=new Timeslot();
+        $timetabling=new TimeTabeling();
         $seances=$timetabling->cour_group();
-        $table=array();
 
-
-        $i=0;
-        foreach ($professors as $professor){
-
-
-            $hours=0;
-            $professor->initialise_timeslots();
-            $x=0;
-            while ( $x <6 && $seances!=null) {
-                $timetabling=new TimeTabeling();
-                $timetabling->professor_id=$professor->id;
-                $available=$timetabling->professor_available($hours,$professor);
-                if($available==true){
-
-                    $timeslot=$professor->find_timeslot();
-                    $timetabling->timeslot_id=$timeslot->id;
-                    $professor->timeslots()->attach($timeslot);
-                    $room=$timetabling->find_room($timeslot);
-                    $timetabling->room_id=$room->id;
-                    $timetabling->attach_cours_timeslot($seances[0]->cours_id,$timeslot);
-                    $timetabling->cours_id=$seances[0]->cours_id;
-                    $timetabling->attach_groups_timeslot($seances[0]->group_id,$timeslot);
-                    $timetabling->group_id=$seances[0]->group_id;
-
-                            //$professor_group_csours=$professor->first_name.' '.$timeslot->name.''.$room->code;
-                    $table[$i]=$timetabling;
-                            $i++;
-                            $hours++;
-                            array_shift($seances);
+                $timetabling->dettach_rooom_timeslots();
+                $timetabling->dettach_professor_timeslots();
+                $timetabling->dettach_group_timeslots();
+                $timetabling->dettach_section_timeslots();
+                $timetabling->dettach_cours_timeslots();
+                $timetabling->intialise_rooms();
+                $timetabling->intialise_professors();
+                $timeslot = new Timeslot();
+                $seances = $timetabling->cour_group();
+                $arr = array();
+                $table02 = array();
+                $i = 0;
+                foreach ($professors as $professor) {
+                    $professor->initialise_timeslots();
+                    $x = 0;
+                    $bool = empty($seances);
+                    while ($x < 6 && $bool == false) {
+                        $timetabling = new TimeTabeling();
+                        $timetabling1 = new TimeTabeling();
+                        $timetabling1->professor_id = $professor->id;
+                        $timetabling1->professor_name = $professor->first_name;
+                        $available = $timetabling->professor_available($x, $professor);
+                        if ($available == true) {
+                            $timeslot = $professor->find_timeslot();
+                            $timetabling1->timeslot_id = $timeslot->id;
+                            $timetabling1->timeslot_name = $timeslot->name;
+                            $professor->timeslots()->attach($timeslot);
+                            shuffle($seances);
+                            $random = 0;
+                            $room = $timetabling->find_room($timeslot, $seances[$random]);
+                            $timetabling1->room_id = $room->id;
+                            $timetabling1->room_name = $room->code;
+                            $timetabling1->attache_science_timeslot($seances[$random], $timeslot);
+                            $timetabling1->section_id = $seances[$random]->section_id;
+                            $timetabling1->section_name = $seances[$random]->section_name;
+                            $timetabling1->section_id = $seances[$random]->group_id;
+                            $timetabling1->section_name = $seances[$random]->group_name;
+                            $timetabling1->cours_id = $seances[$random]->cours_id;
+                            $timetabling1->cours_name = $seances[$random]->cours_name;
+                            $timetabling1->type = $seances[$random]->type;
                             $x++;
-                }
+                            //unset($seances[$random]);
+                            $bool = empty($seances);
+                            //$seances=$timetabling1->reindex_numeric($seances);
+                            array_shift($seances);
+                        }
+                        $table02[$i] = $timetabling1;
+                        $i++;
+
             }
         }
 
-        return view('admin.timetabelings.index',compact('days','timeslots','table'));
+                    return view('admin.timetabelings.index',compact('days','timeslots','table'));
     }
 
     /**

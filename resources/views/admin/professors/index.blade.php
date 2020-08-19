@@ -29,6 +29,7 @@
                                 <td class="text-light">{{$professor->sex}}</td>
                                 <td class="text-light">
                                     @foreach($professor->timeslots as $timeslot)
+                                        {{$timeslot->day->name}}
                                         {{$timeslot->name}}
                                    @endforeach
                                    </td>

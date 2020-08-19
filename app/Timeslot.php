@@ -23,6 +23,10 @@ class Timeslot extends Model
     {
         return $this->belongsToMany(Group::class);
     }
+    public function sections()
+    {
+        return $this->belongsToMany(section::class);
+    }
     public function rooms()
     {
         return $this->belongsToMany(Room::class);

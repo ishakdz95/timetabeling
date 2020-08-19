@@ -23,6 +23,12 @@
                                 <td class="text-light">
                                     {{$section->year->name}}
                                 </td>
+                                <td class="text-light">
+                                    @foreach($section->timeslots as $timeslot)
+                                        {{$timeslot->name}}
+                                        {{$timeslot->day->name}}
+                                    @endforeach
+                                </td>
                                 <td><a href="{{route('admin.sections.edit',$section->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.sections.destroy',$section->id)}}">
                                         @csrf

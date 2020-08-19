@@ -23,6 +23,13 @@
                                 <td class="text-light">
                                     {{$group->section->name}}
                                 </td>
+                                <td class="text-light">
+                                    @foreach($group->timeslots as $timeslot)
+                                        {{$timeslot->name}}
+                                        {{$timeslot->day->name}}
+
+                                    @endforeach
+                                </td>
                                 <td><a href="{{route('admin.groups.edit',$group->id)}}" class="btn btn-info">Edit</a><td>
                                 <form method="POST" action="{{route('admin.groups.destroy',$group->id)}}">
                                     @csrf
