@@ -10,19 +10,23 @@
                 <div class="card-body">
                     <br><br><br>
 
-                    <table class="table">
-
-
-                        <tr class="text-light">
-                            @forelse($table as $t)
-                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->name}}</div>
-                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->courses->find($t->cours_id)->name}}</div>
-                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->professors->find($t->professor_id)->first_name}}</div>
-                                <div class="text-light">{{$timeslots->find($t->timeslot_id)->groups->find($t->group_id)->name}}</div>
+                    <table border=1 width=1500>
+                            @forelse($tables as $table)
+                            <tr class="text-light">
+                            @foreach($table as $value)
+                                    <td>
+                                        {{$value->day_name}}
+                                        {{$value->timeslot_name}}<br>
+                                        {{$value->professor_name}}<br>
+                                        {{$value->cours_name}}<br>
+                                        {{$value->type}}<br>
+                                        {{$value->section_name}}<br>
+                                     {{$value->group_name}}</td>
+                                @endforeach
+                            </tr>
                             @empty
 
                             @endforelse
-                        </tr>
 
                     </table>
                 </div>

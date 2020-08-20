@@ -18,6 +18,8 @@ class TimeTabeling extends Model
     public $timeslot_name;
     public $section_id;
     public $section_name;
+    public $day_id=0;
+    public $day_name='';
     public $type='';
     public function cour_group(){
         $groups=Group::all();
