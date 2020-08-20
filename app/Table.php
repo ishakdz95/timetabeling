@@ -12,6 +12,7 @@ class Table extends Model
         $days=Day::all();
         $timeslots=Timeslot::all();
         $timetabling=new TimeTabeling();
+
         $seances=$timetabling->cour_group();
         $timetabling->dettach_rooom_timeslots();
         $timetabling->dettach_professor_timeslots();
