@@ -10,25 +10,7 @@
                 <div class="card-body">
                     <br><br><br>
 
-                    <table border=1 width=1500>
-                            @forelse($tables as $table)
-                            <tr class="text-light">
-                            @foreach($table as $value)
-                                    <td>
-                                        {{$value->day_name}}
-                                        {{$value->timeslot_name}}<br>
-                                        {{$value->professor_name}}<br>
-                                        {{$value->cours_name}}<br>
-                                        {{$value->type}}<br>
-                                        {{$value->section_name}}<br>
-                                     {{$value->group_name}}</td>
-                                @endforeach
-                            </tr>
-                            @empty
 
-                            @endforelse
-
-                    </table>
                 </div>
             </div>
         </div>

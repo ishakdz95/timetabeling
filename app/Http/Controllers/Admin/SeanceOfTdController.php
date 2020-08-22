@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Course;
-use App\Day;
-use App\Group;
-use App\Http\Controllers\Controller;
-use App\Professor;
-use App\Room;
-use App\Table;
-use App\Timeslot;
-use App\TimeTabeling;
+use App\Seance_of_Td;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-
-class TimeTabelingController extends Controller
+class SeanceOfTdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,14 +15,7 @@ class TimeTabelingController extends Controller
      */
     public function index()
     {
-        $table=new Table();
-        $table->test();
-        /*$table=new Table();
-        for ($i=0;$i<10;$i++){
-            $tables[$i]=$table->make_random_table();
-        }*/
-        //$table->fitness_function($tables);
-                    return view('admin.timetabelings.index');
+        //
     }
 
     /**
@@ -57,10 +42,10 @@ class TimeTabelingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\TimeTabeling  $timeTabeling
+     * @param  \App\Seance_of_Td  $seance_of_Td
      * @return \Illuminate\Http\Response
      */
-    public function show(TimeTabeling $timeTabeling)
+    public function show(Seance_of_Td $seance_of_Td)
     {
         //
     }
@@ -68,10 +53,10 @@ class TimeTabelingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\TimeTabeling  $timeTabeling
+     * @param  \App\Seance_of_Td  $seance_of_Td
      * @return \Illuminate\Http\Response
      */
-    public function edit(TimeTabeling $timeTabeling)
+    public function edit(Seance_of_Td $seance_of_Td)
     {
         //
     }
@@ -80,10 +65,10 @@ class TimeTabelingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\TimeTabeling  $timeTabeling
+     * @param  \App\Seance_of_Td  $seance_of_Td
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TimeTabeling $timeTabeling)
+    public function update(Request $request, Seance_of_Td $seance_of_Td)
     {
         //
     }
@@ -91,10 +76,10 @@ class TimeTabelingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\TimeTabeling  $timeTabeling
+     * @param  \App\Seance_of_Td  $seance_of_Td
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TimeTabeling $timeTabeling)
+    public function destroy(Seance_of_Td $seance_of_Td)
     {
         //
     }

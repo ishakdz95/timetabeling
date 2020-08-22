@@ -3,16 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Course;
-use PhpParser\Builder\Class_;
 
 class Seance extends Model
 {
-    public $cours_id=0;
-    public $cours_name='';
-    public $group_id=0;
-    public $group_name='';
-    public $section_id=0;
-    public $section_name='';
-    public $type='';
+    protected $fillable=['day_id','day_name','timeslot_id',
+        'timeslot_name','room_id','room_name','cours_id','cours_name','set_id',
+        'set_name','type'];
 }
