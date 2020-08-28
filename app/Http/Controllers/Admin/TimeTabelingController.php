@@ -35,6 +35,7 @@ class TimeTabelingController extends Controller
             $table->transfer_one_timetabeling($arr);
             $table->fitness_function($arr);
             $table->delete_one_timetabeling();
+
         }
                     return view('admin.timetabelings.index',compact('arr','arr2'));
     }
