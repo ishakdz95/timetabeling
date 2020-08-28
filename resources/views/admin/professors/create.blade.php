@@ -20,13 +20,13 @@
                            <option value="A2">A2</option>
                            <option value="A3">A3</option>
                        </select>
+                       <br>
                        <label class="text-light">Sex:</label>
                        <input type="radio" id="male" name="sex" value="male">
                        <label class="text-light" for="male">Male</label>
                        <input type="radio" id="female" name="sex" value="female">
                        <label class="text-light" for="female">Female</label>
                        <div type="hidden">
-                           <label class="text-light">Available:</label>
                            <input type="hidden" id="available" name="available" value="1" >
                        </div>
                        <br/><br/>

@@ -283,8 +283,11 @@ svg {
   vertical-align: middle;
 }
 
-table {
+table,tr,td {
   border-collapse: collapse;
+
+    border: 1px solid blanchedalmond;
+
 }
 
 caption {

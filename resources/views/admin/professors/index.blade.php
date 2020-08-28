@@ -38,7 +38,7 @@
                                     <form method="POST" action="{{route('admin.professors.destroy',$professor->id)}}">
                                         @csrf
                                         {{ method_field('DELETE') }}
-                                        <input type="submit" value="Delete" onclick="return confirm('Are you sure?')" class="btn btn-danger"/>
+                                        <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this professor?')" class="btn btn-danger"/>
                                     </form>
                             </tr>
 

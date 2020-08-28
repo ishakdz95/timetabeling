@@ -12,24 +12,22 @@ class Professor extends Model
     {
         return $this->belongsToMany(Timeslot::class);
     }
-    public function find_timeslot(){
-        $timeslots=Timeslot::all();
-        foreach ($timeslots as $timeslot){
-            if ($timeslot->available==true){
-                $t=$timeslot;
-                $timeslot->available=false;
-                $timeslot->save();
-                return $t;
-            }
+public function intial_professor(){
+        $professors=Professor::all();
+        $i=1;
+        foreach ($professors as $professor){
+            $professor->id=$i;
+            $professor->hour=6;
+            $professor->save();
+            $i++;
         }
+}
+  public function random_professor(){
+        $professors=Professor::all();
+        $random=rand(1,count($professors));
+        $professor=$professors->find($random);
+     return $professor;
 
-    }
-    public function initialise_timeslots(){
-        $timeslots=Timeslot::all();
-        foreach ($timeslots as $timeslot){
-            $timeslot->available=true;
-            $timeslot->save();
-        }
-    }
+  }
 
 }

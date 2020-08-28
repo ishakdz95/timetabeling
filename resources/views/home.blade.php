@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <p class="text-light">You are logged in!</p>
+                    <p class="text-light">Welcome to timetabeling generator</p>
                 </div>
             </div>
         </div>

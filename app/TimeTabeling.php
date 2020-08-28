@@ -6,162 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 class TimeTabeling extends Model
 {
-    public $group_id;
-    public $group_name='';
-    public $cours_id;
-    public $cours_name='';
-    public $professor_id;
-    public $professor_name='';
-    public $room_id;
-    public $room_name='';
-    public $timeslot_id;
-    public $timeslot_name;
-    public $section_id;
-    public $section_name;
-    public $day_id=0;
-    public $day_name='';
-    public $type='';
-
-    public function professor_available(int $hour,Professor $professor){
-        if ($hour>5){
-            $professor->available=false;
-            $professor->save();
-        }
-        return $professor->available;
-
-    }
-    public function intialise_professors(){
-        $professors=Professor::all();
-        foreach ($professors as $professor) {
-            $professor->available=true;
-            $professor->hour=6;
-            $professor->save();
-        }
-    }
-    public function find_room(Timeslot $timeslot,Seance $seance){
-        $rooms=Room::all();
-        foreach ($rooms as $room){
-            if($room->timeslots()->find($timeslot->id)==null){
-                if($room->type==$seance->type){
-                    $room->timeslots()->attach($timeslot);
-                    return $room;
-                }
-
-            }
-        }
-    }
-    public function dettach_rooom_timeslots(){
+    protected $fillable=['day_id','day_name','timeslot_id', 'timeslot_name',
+        'room_id','room_name','$professor_id','$professor_first_name',
+        '$professor_last_name','cours_id','cours_name','set_id', 'set_name','type'];
+    public function dettach_timeslots(){
          $rooms=Room::all();
             foreach ($rooms as $room){
                $room->timeslots()->detach();
              }
-         }
-    public function dettach_professor_timeslots(){
         $professros=Professor::all();
         foreach ($professros as $professor){
             $professor->timeslots()->detach();
         }
-    }
-    public function intialise_rooms(){
-        $rooms=Room::all();
-        foreach ($rooms as $room){
-            $room->available=true;
-            $room->save();
-        }
-    }
-    public function dettach_group_course(){
-        $groups=Group::all();
-        foreach ($groups as $group){
-            $group->courses()->detach();
-        }
-
-    }
-    public function dettach_group_timeslots(){
         $groups=Group::all();
         foreach ($groups as $group){
             $group->timeslots()->detach();
         }
-    }
-    public function dettach_section_timeslots(){
         $sections=section::all();
         foreach ($sections as $section){
             $section->timeslots()->detach();
         }
-    }
-    public function dettach_cours_timeslots(){
         $courses=Course::all();
         foreach ($courses as $cours){
             $cours->timeslots()->detach();
         }
-    }
-    public function attach_cours_timeslot(string $cours_id,Timeslot $timeslot)
-    {
-        $courses = Course::all();
-        foreach ($courses as $cours) {
-
-            if ($cours->id == $cours_id) {
-                $cours->timeslots()->attach($timeslot);
-            }
-
-        }
-    }
-    public function attach_groups_timeslot(string $group_id,Timeslot $timeslot){
-        $groups=Group::all();
-        foreach ($groups as $group) {
-            if ($group->id == $group_id) {
-                if($group->timeslots()->find($timeslot->id)==null){
-                    $group->timeslots()->syncWithoutDetaching($timeslot);
-                    //$timeslot->sections()->syncWithoutDetaching($group->section);
-                }
-            }
-        }
-    }
-
-    public function attach_section_timeslot(string $section_id,Timeslot $timeslot){
-        $sections=section::all();
-        foreach ($sections as $section) {
-            if ($section->id == $section_id) {
-                    $section->timeslots()->syncWithoutDetaching($timeslot);
-                    foreach ($section->groups as $group){
-                        $group->timeslots()->attach($timeslot);
-                }
-            }
-        }
-    }
-
-    public function attache_science_timeslot(Seance $seance,Timeslot $timeslot){
-        $groups=Group::all();
-        $sections=section::all();
-        $cours=Course::all();
-        $section=$sections->find($seance->section_id);
-        if($seance->type=='Cours'){
-                    $section->timeslots()->attach($timeslot);
-                    $cour=$cours->find($seance->cours_id);
-                    $cour->timeslots()->attach($timeslot);
-                    foreach ($section->groups as $group){
-                    $group->timeslots()->attach($timeslot);
-                 }
-        }
-        else{
-            $group=$groups->find($seance->group_id);
-                $group->timeslots()->attach($timeslot);
-                $cour=$cours->find($seance->cours_id);
-                $cour->timeslots()->attach($timeslot);
-        }
-    }
-    public function find_seance_timeslot(Seance $seance){
-        $timeslots=Timeslot::all();
-        $sections=section::all();
-            $section=$sections->find($seance->section_id);
-            foreach ($timeslots as $timeslot){
-                if ($timeslot->available==true){
-                    $section->timeslots()->syncWithoutDetaching($timeslot);
-                }
-            }
-
-
-    }
-
+         }
 
     public function delete_seance(){
         $seances=Seance::all();
@@ -179,27 +48,33 @@ class TimeTabeling extends Model
                 if ($ss->available==true){
                     if ($rt->available==true){
                         if ($ss->type==$rt->type){
-                            $seance = new Seance();
-                            $seance->day_id=$rt->day_id;
-                            $seance->day_name=$rt->day_name;
-                            $seance->timeslot_id=$rt->timeslot_id;
-                            $seance->timeslot_name=$rt->timeslot_name;
-                            $seance->room_id=$rt->room_id;
-                            $seance->room_name=$rt->room_name;
-                            $seance->cours_id=$ss->cours_id;
-                            $seance->cours_name=$ss->cours_name;
-                            $seance->set_id=$ss->section_id;
-                            $seance->set_name=$ss->section_name;
-                            $seance->type=$ss->type;
-                            $section=$sections->find($ss->section_id);
                             $timeslot=$timeslots->find($rt->timeslot_id);
-                            $section->timeslots()->attach($timeslot);
-                            foreach($section->groups as $group){
-                                $group->timeslots()->attach($timeslot);
+                            $section=$sections->find($ss->section_id);
+                            if($section->timeslots()->find($rt->timeslot_id)==null) {
+                                $seance = new Seance();
+                                $seance->day_id = $rt->day_id;
+                                $seance->day_name = $rt->day_name;
+                                $seance->timeslot_id = $rt->timeslot_id;
+                                $seance->timeslot_name = $rt->timeslot_name;
+                                $seance->room_id = $rt->room_id;
+                                $seance->room_name = $rt->room_name;
+                                $seance->cours_id = $ss->cours_id;
+                                $seance->cours_name = $ss->cours_name;
+                                $seance->set_id = $ss->section_id;
+                                $seance->set_name = $ss->section_name;
+                                $seance->type = $ss->type;
+                                $section = $sections->find($ss->section_id);
+                                $timeslot = $timeslots->find($rt->timeslot_id);
+                                $section->timeslots()->attach($timeslot);
+                                foreach ($section->groups as $group) {
+                                    $group->timeslots()->attach($timeslot);
+                                }
+                                $seance->save();
+                                $ss->available = false;
+                                $rt->available = false;
+                                $ss->save();
+                                $rt->save();
                             }
-                            $seance->save();
-                            $ss->available=false;
-                            $rt->available=false;
                         }
                     }
                 }
@@ -248,4 +123,27 @@ class TimeTabeling extends Model
             }
         }
     }
+    public function array_of_seances(){
+        $seances=Seance::all();
+        $arr=array();
+        $i=0;
+        foreach ($seances as $seance){
+            $seancewp=new SeanceWP();
+             $seancewp->day_id=$seance->day_id;
+             $seancewp->day_name=$seance->day_name;
+             $seancewp->timeslot_id=$seance->timeslot_id;
+             $seancewp->timeslot_name=$seance->timeslot_name;
+             $seancewp->room_id=$seance->room_id;
+             $seancewp->room_name=$seance->room_name;
+             $seancewp->cours_id=$seance->cours_id;
+             $seancewp->cours_name=$seance->cours_name;
+             $seancewp->set_id=$seance->set_id;
+             $seancewp->set_name=$seance->set_name;
+             $seancewp->type=$seance->type;
+             $arr[$i]=$seancewp;
+             $i++;
+        }
+        return $arr;
+    }
+
 }
