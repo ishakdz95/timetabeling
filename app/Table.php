@@ -8,6 +8,7 @@ use PhpParser\Node\Expr\Array_;
 class Table extends Model
 {
     public function make_random_timetabeling(){
+
         $timetabling=new TimeTabeling();
         $professor=new Professor();
         $timetabling->dettach_timeslots();
@@ -45,6 +46,8 @@ class Table extends Model
                     $timetabling->set_id = $seances[0]->set_id;
                     $timetabling->set_name = $seances[0]->set_name;
                     $timetabling->type = $seances[0]->type;
+                    $timetabling->available = $seances[0]->available;
+                    $timetabling->fitness=1;
                     $timetabling->save();
                     array_shift($seances);
                     shuffle($seances);
@@ -66,90 +69,42 @@ class Table extends Model
             $timeTabeling->delete();
         }
     }
-    public function delete_timetabelings_saves(){
-        $timetabelings=TimetabelingSave::all();
-        foreach ($timetabelings as $timeTabeling){
-            $timeTabeling->delete();
-        }
-    }
     public function return_one_timetabeling(){
         $seances=Seance::all();
         $cont=count($seances);
         $timetabelings=TimeTabeling::all();
-        $timetabelings_save=TimetabelingSave::all();
-        $contTimetabeling=count($timetabelings);
-        $contTimetabelingSave=count($timetabelings_save);
         $arr=array();
         $i=0;
-        if ($contTimetabeling>0){
             foreach ($timetabelings as $timetabling){
-                if ($cont>0){
+                if ($cont>0 && $timetabling->available==true){
                     $tt= new TimeTabeling();
                     $tt=$timetabling;
+                    $timetabling->available=false;
+                    $timetabling->save();
                     $cont--;
                     $arr[$i]=$tt;
                     $i++;
                 }
             }
             return $arr;
-        }
-        else{
-            foreach ($timetabelings_save as $timetabling_save){
-                if ($cont>0){
-                    $tt= new TimetabelingSave();
-                    $tt=$timetabling_save;
-                    $cont--;
-                    $arr[$i]=$tt;
-                    $i++;
-                }
-            }
-            return $arr;
-        }
+    }
 
-    }
-    public function delete_one_timetabeling(){
-        $seances=Seance::all();
-        $cont=count($seances);
-        $timetabelings=TimeTabeling::all();
-        foreach ($timetabelings as $timetabling){
-            if ($cont>0){
-                $timetabling->delete();
-                $cont--;
-            }
-        }
-    }
-    public function transfer_one_timetabeling(array $arr){
-        foreach ($arr as $item){
-            $timetabling=new TimetabelingSave();
-            $timetabling->day_id = $item->day_id;
-            $timetabling->day_name = $item->day_name;
-            $timetabling->timeslot_id = $item->timeslot_id;
-            $timetabling->timeslot_name = $item->timeslot_name;
-            $timetabling->room_id = $item->room_id;
-            $timetabling->room_name = $item->room_name;
-            $timetabling->professor_id = $item->professor_id;
-            $timetabling->professor_first_name = $item->professor_first_name;
-            $timetabling->professor_last_name = $item->professor_last_name;
-            $timetabling->cours_id = $item->cours_id;
-            $timetabling->cours_name = $item->cours_name;
-            $timetabling->set_id =$item->set_id;
-            $timetabling->set_name = $item->set_name;
-            $timetabling->type = $item->type;
-            $timetabling->save();
-        }
-    }
-    public function fitness_function(array $arr){
+    public function fitness_function(array $array){
         $i=0;
-            foreach ($arr as $item){
-                foreach ($arr as $value)
-                if ($item->professor_id==$value->professor_id && $item->timeslot_id==$value->timeslot_id &&$item->id=!$value->id && $item->id=!$value->id){
-                    $i++;
-
+            foreach ($array as $item){
+                $item_id=$item->id;
+                foreach ($array as $value){
+                    $value_id=$value->id;
+                    if ($item->professor_id==$value->professor_id && $item->timeslot_id==$value->timeslot_id && $item_id!=$value_id ){
+                        $i++;
+                    }
                 }
+
             }
         $fitness=new Fitness();
         $fitness->fitness=$i;
         $fitness->save();
+        return($i);
     }
     public function delete_fitness(){
         $fitness=Fitness::all();
@@ -157,13 +112,125 @@ class Table extends Model
             $item->delete();
         }
     }
-    public function crossing(){
-        $timetabelings=TimeTabeling::all();
-        $timetabelings_save=TimetabelingSave::all();
+    public function change_fitness(int $fit,array $arr){
         $seances=Seance::all();
-        $count=count($seances);
+        $cont=count($seances);
+        $timetabelings=TimeTabeling::all();
+        foreach ($arr as $item) {
+        foreach ($timetabelings as $timetabling){
+            if ($cont>0 && $timetabling->id==$item->id ){
+                $timetabling->fitness=$fit;
+                $timetabling->save();
+                $cont--;
+            }
+        }
+        }
+    }
+    public function fitness_averege(){
+        $fitnesses=Fitness::all();
+        $average=0;
+        $i=0;
+        foreach ($fitnesses as $fitness){
+            $average=$average+$fitness->fitness;
+            $i++;
+        }
+        $average=$average/$i;
+        return $average;
+    }
+    public function delete_bad_timetabeling(int $average){
+      $timetabelings=TimeTabeling::all();
+      foreach ($timetabelings as $timetabeling){
+          if ($timetabeling->fitness>$average){
+              $timetabeling->delete();
+          }
+      }
+    }
+    public function crossing(array $arr1,array $arr2){
+        $timetabelings=TimeTabeling::all();
+        $table=new Table();
+        $table->intial_available_of_timetabeling();
+        $array01=$table->semi_chromosome($arr1);
+        $array02=$table->semi_chromosome02($arr2);
+        //$array03=$table->chromosome();
+
 
     }
-
-
+    public function intial_available_of_timetabeling(){
+        $timetabelings=TimeTabeling::all();
+        foreach ($timetabelings as $timetabeling){
+            $timetabeling->available=true;
+            $timetabeling->save();
+        }
+    }
+    public function semi_chromosome(array $arr){
+        $table=new Table();
+        $seances=Seance::all();
+        $count=count($seances);
+        $array02=array();
+        $i=0;
+        foreach ($arr as $item){
+            if ($i<$count/2){
+                $professor=new Professor();
+                $professor->id1=$item->professor_id;
+                $professor->first_name1=$item->professor_first_name;
+                $professor->last_name1=$item->professor_last_name;
+                $array02[$i]=$professor;
+                $i++;
+            }
+        }
+        return $array02;
+    }
+    public function semi_chromosome02()
+    {
+        $table = new Table();
+        $seances = Seance::all();
+        $count = count($seances);
+        $array01 = $table->return_one_timetabeling();
+        $array02 = array();
+        $i = 0;
+        foreach ($array01 as $item) {
+            if ($i >= $count / 2) {
+                $professor = new Professor();
+                $professor->id1 = $item->professor_id;
+                $professor->first_name1 = $item->professor_first_name;
+                $professor->last_name1 = $item->professor_last_name;
+                $array02[$i] = $professor;
+            }
+            $i++;
+        }
+        return $array02;
+    }
+    public function chromosome(){
+        $table=new Table();
+        $array01=$table->return_one_timetabeling();
+        $array02=array();
+        $i=0;
+        foreach ($array01 as $item){
+                $professor=new Professor();
+                $professor->id1=$item->professor_id;
+                $professor->first_name1=$item->professor_first_name;
+                $professor->last_name1=$item->professor_last_name;
+                $array02[$i]=$professor;
+            $i++;
+        }
+        return $array02;
+    }
+    public function matrice_of_timetabelings(){
+        $seances=Seance::all();
+        $count=count($seances);
+        $timetabelings=TimeTabeling::all();
+        $i=0;
+        $j=0;
+        foreach ($timetabelings as $timetabeling){
+                $arr[$i][$j]=$timetabeling;
+                $j++;
+                $count--;
+                if ($count==0){
+                    $count=count($seances);
+                    $i++;
+                    $j=0;
+                }
+        }
+       return $arr;
+    }
 }

@@ -17,4 +17,5 @@ class SeanceWP extends Model
     public $set_id=0;
     public $set_name='';
     public $type='';
+    public $available=true;
 }

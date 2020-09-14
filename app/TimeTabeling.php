@@ -8,7 +8,8 @@ class TimeTabeling extends Model
 {
     protected $fillable=['day_id','day_name','timeslot_id', 'timeslot_name',
         'room_id','room_name','$professor_id','$professor_first_name',
-        '$professor_last_name','cours_id','cours_name','set_id', 'set_name','type'];
+        '$professor_last_name','cours_id','cours_name','set_id',
+        'set_name','type','available','fitness'];
     public function dettach_timeslots(){
          $rooms=Room::all();
             foreach ($rooms as $room){
@@ -63,6 +64,7 @@ class TimeTabeling extends Model
                                 $seance->set_id = $ss->section_id;
                                 $seance->set_name = $ss->section_name;
                                 $seance->type = $ss->type;
+                                $seance->available = $ss->available;
                                 $section = $sections->find($ss->section_id);
                                 $timeslot = $timeslots->find($rt->timeslot_id);
                                 $section->timeslots()->attach($timeslot);
@@ -107,6 +109,7 @@ class TimeTabeling extends Model
                                 $seance->set_id=$st->group_id;
                                 $seance->set_name=$st->group_name;
                                 $seance->type=$st->type;
+                                $seance->available = $st->available;
                                 $timeslot=$timeslots->find($rt->timeslot_id);
                                 $group->timeslots()->attach($timeslot);
                                 $seance->save();
@@ -140,6 +143,7 @@ class TimeTabeling extends Model
              $seancewp->set_id=$seance->set_id;
              $seancewp->set_name=$seance->set_name;
              $seancewp->type=$seance->type;
+             $seancewp->available=$seance->available;
              $arr[$i]=$seancewp;
              $i++;
         }

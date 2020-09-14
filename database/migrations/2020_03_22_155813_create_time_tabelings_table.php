@@ -29,6 +29,8 @@ class CreateTimeTabelingsTable extends Migration
             $table->unsignedBigInteger('set_id');
             $table->string('set_name');
             $table->string('type');
+            $table->boolean('available');
+            $table->unsignedBigInteger('fitness');
             $table->timestamps();
         });
     }

@@ -14,8 +14,8 @@ class Room_Timeslot extends Model
         $timeslots=Timeslot::all();
         $rooms_timeslots=array();
         $i=0;
-        foreach ($timeslots as $timeslot){
-            foreach ($rooms as $room){
+        foreach ($rooms as $room){
+            foreach ($timeslots as $timeslot){
                 $room->timeslots()->attach($timeslot);
                 $room_timeslot=new Room_Timeslot();
                 $room_timeslot->day_id=$timeslot->day->id;

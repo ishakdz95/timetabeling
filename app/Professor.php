@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Professor extends Model
 {
+    public $id1=0;
+    public $first_name1='';
+    public $last_name1='';
     protected $fillable =['first_name','last_name','grade','sex','hour','available'];
 
     public function timeslots()

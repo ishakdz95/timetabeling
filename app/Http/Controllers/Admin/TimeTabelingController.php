@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Course;
 use App\Day;
+use App\Fitness;
 use App\Group;
 use App\Http\Controllers\Controller;
 use App\Professor;
@@ -25,19 +26,21 @@ class TimeTabelingController extends Controller
     {
         $table=new Table();
         $table->delete_timetabelings();
-        $table->delete_timetabelings_saves();
         $table->delete_fitness();
         for($i=0;$i<10;$i++){
             $table->make_random_timetabeling();
         }
+
         for($i=0;$i<10;$i++){
             $arr=$table->return_one_timetabeling();
-            $table->transfer_one_timetabeling($arr);
-            $table->fitness_function($arr);
-            $table->delete_one_timetabeling();
-
+            $fit=$table->fitness_function($arr);
+            $table->change_fitness($fit,$arr);
         }
-                    return view('admin.timetabelings.index',compact('arr','arr2'));
+        $average=$table->fitness_averege();
+        $table->delete_bad_timetabeling($average);
+        $timetabelings=$table->matrice_of_timetabelings();
+        $table->crossing($timetabelings[0],$timetabelings[1]);
+                    return view('admin.timetabelings.index',compact('arr'));
     }
 
     /**
