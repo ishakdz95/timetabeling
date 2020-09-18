@@ -18,6 +18,11 @@
                            <option value="TD">TD</option>
                            <option value="TP">TP</option>
                        </select>
+                       <label class="text-light">Priorty:</label>
+                       <select class="form-control" name="priority" >
+                           <option value="A">A</option>
+                           <option value="B">B</option>
+                       </select>
 
                        <label class="text-light">Year:</label>
                        <select class="form-control " name="year_id">

@@ -15,6 +15,7 @@
                             <th class="text-light">First name</th>
                             <th class="text-light">Last name</th>
                             <th class="text-light">Grade</th>
+                            <th class="text-light">Type</th>
                             <th class="text-light">Sex</th>
                             <th class="text-light">Time Slots</th>
                             <th></th>
@@ -26,6 +27,7 @@
                                 <td class="text-light">{{$professor->first_name}}</td>
                                 <td class="text-light">{{$professor->last_name}}</td>
                                 <td class="text-light">{{$professor->grade}}</td>
+                                <td class="text-light">{{$professor->type}}</td>
                                 <td class="text-light">{{$professor->sex}}</td>
                                 <td class="text-light">
                                     @foreach($professor->timeslots as $timeslot)

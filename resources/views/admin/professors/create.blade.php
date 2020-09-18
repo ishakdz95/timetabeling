@@ -20,6 +20,11 @@
                            <option value="A2">A2</option>
                            <option value="A3">A3</option>
                        </select>
+                       <label class="text-light">Type:</label>
+                       <select class="form-control" name="type" >
+                           <option value="A">A</option>
+                           <option value="B">B</option>
+                       </select>
                        <br>
                        <label class="text-light">Sex:</label>
                        <input type="radio" id="male" name="sex" value="male">

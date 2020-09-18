@@ -9,7 +9,7 @@ class Professor extends Model
     public $id1=0;
     public $first_name1='';
     public $last_name1='';
-    protected $fillable =['first_name','last_name','grade','sex','hour','available'];
+    protected $fillable =['first_name','last_name','grade','sex','hour','available','type'];
 
     public function timeslots()
     {

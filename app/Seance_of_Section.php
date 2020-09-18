@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seance_of_Section extends Model
 {
     protected $fillable=['cours_id','cours_name','section_id',
-                        'section_name','type','available'];
+                        'section_name','type','available','priority'];
 
 
     public function seances_of_sections(){
@@ -31,6 +31,7 @@ class Seance_of_Section extends Model
                         $seance_of_section->section_id=$section->id;
                         $seance_of_section->section_name=$section->name;
                         $seance_of_section->type=$cours_type;
+                        $seance_of_section->priority=$cours->priority;
                         $seance_of_section->available=true;
                         $seance_of_section->save();
                     }

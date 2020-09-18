@@ -20,6 +20,7 @@ class CreateSeanceOfTdsTable extends Migration
             $table->unsignedBigInteger('group_id');
             $table->string('group_name');
             $table->string('type');
+            $table->string('priority');
             $table->boolean('available');
             $table->timestamps();
         });

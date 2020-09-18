@@ -8,7 +8,7 @@ class TimeTabeling extends Model
 {
     protected $fillable=['day_id','day_name','timeslot_id', 'timeslot_name',
         'room_id','room_name','$professor_id','$professor_first_name',
-        '$professor_last_name','cours_id','cours_name','set_id',
+        '$professor_last_name','cours_id','priority','cours_name','set_id',
         'set_name','type','available','fitness'];
     public function dettach_timeslots(){
          $rooms=Room::all();
@@ -61,6 +61,7 @@ class TimeTabeling extends Model
                                 $seance->room_name = $rt->room_name;
                                 $seance->cours_id = $ss->cours_id;
                                 $seance->cours_name = $ss->cours_name;
+                                $seance->priority = $ss->priority;
                                 $seance->set_id = $ss->section_id;
                                 $seance->set_name = $ss->section_name;
                                 $seance->type = $ss->type;
@@ -106,6 +107,7 @@ class TimeTabeling extends Model
                                 $seance->room_name=$rt->room_name;
                                 $seance->cours_id=$st->cours_id;
                                 $seance->cours_name=$st->cours_name;
+                                $seance->priority = $st->priority;
                                 $seance->set_id=$st->group_id;
                                 $seance->set_name=$st->group_name;
                                 $seance->type=$st->type;
@@ -143,6 +145,7 @@ class TimeTabeling extends Model
              $seancewp->set_id=$seance->set_id;
              $seancewp->set_name=$seance->set_name;
              $seancewp->type=$seance->type;
+            $seancewp->priority=$seance->priority;
              $seancewp->available=$seance->available;
              $arr[$i]=$seancewp;
              $i++;
@@ -164,8 +167,8 @@ class TimeTabeling extends Model
             $rand = rand(0, $count - 1);
             $professor = $professors[$rand];
             if ($professor->hour > 0) {
-                $professor->hour = $professor->hour - 1;
-                $professor->save();
+                /*$professor->hour = $professor->hour - 1;
+                $professor->save();*/
                 $bool = false;
                 return $professor;
             }

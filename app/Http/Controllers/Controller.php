@@ -24,6 +24,8 @@ class Controller extends BaseController
             $fit = $table->fitness_function($arr);
             $table->change_fitness($fit, $arr);
         }
+        return redirect()->route('admin.timetabelings.index');
+
     }
     public function best_timetabeling(){
         $table = new Table();
@@ -38,9 +40,8 @@ class Controller extends BaseController
                 $fit = $table->fitness_function($chromosome);
                 $table->save_new_chromosome($chromosome,$fit);
             }
-            dump('test');
         }
-
+        return redirect()->route('admin.timetabelings.index');
 
 
     }

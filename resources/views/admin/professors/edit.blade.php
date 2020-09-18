@@ -17,6 +17,8 @@
                        <input type="text" name="last_name" value="{{$professor->last_name}}" class="form-control"/>
                        <label class="text-light">Grade:</label>
                        <input type="text" name="grade" value="{{$professor->grade}}" class="form-control"/>
+                       <label class="text-light">Type:</label>
+                       <input type="text" name="type" value="{{$professor->type}}" class="form-control"/>
                        <label class="text-light">Sex:</label>
                        <input type="text" name="sex" value="{{$professor->sex}}" class="form-control"/>
                        <br/><br/>

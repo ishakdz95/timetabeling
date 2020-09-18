@@ -25,6 +25,7 @@ class Table extends Model
         $timetabling->make_section_seance_without_professor();
         $timetabling->make_td_seance_without_professor();
         $seances=$timetabling->array_of_seances();
+        dd($seances);
         $count=count($seances);
         $table=new Table();
         while ($seances!=null) {
@@ -47,6 +48,8 @@ class Table extends Model
                     $timetabling->type = $seances[0]->type;
                     $timetabling->available = $seances[0]->available;
                     $timetabling->fitness=1;
+                    $professor->hour = $professor->hour - 1;
+                    $professor->save();
                     $timetabling->save();
                     array_shift($seances);
                 }

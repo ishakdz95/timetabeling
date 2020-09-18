@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seance_of_Td extends Model
 {
     protected $fillable=['cours_id','cours_name','group_id',
-        'group_name','type','available'];
+        'group_name','type','available','priority'];
 
     public function seances_of_tds(){
         $courses=Course::all();
@@ -27,6 +27,7 @@ class Seance_of_Td extends Model
                         $seance_of_td->group_id=$group->id;
                         $seance_of_td->group_name=$group->name;
                         $seance_of_td->type=$cours_type;
+                        $seance_of_td->priority=$cours->priority;
                         $seance_of_td->available=true;
                         $seance_of_td->save();
                     }

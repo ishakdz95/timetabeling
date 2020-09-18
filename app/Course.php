@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    protected $fillable=['name','year_id','type'];
+    protected $fillable=['name','year_id','type','priority'];
 
     public function timeslots()
     {

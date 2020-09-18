@@ -21,6 +21,7 @@ class CreateSeanceOfSectionsTable extends Migration
             $table->unsignedBigInteger('section_id');
             $table->string('section_name');
             $table->string('type');
+            $table->string('priority');
             $table->boolean('available');
             $table->timestamps();
         });
