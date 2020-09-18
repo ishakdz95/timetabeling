@@ -24,23 +24,7 @@ class TimeTabelingController extends Controller
      */
     public function index()
     {
-        $table=new Table();
-        $table->delete_timetabelings();
-        $table->delete_fitness();
-        for($i=0;$i<10;$i++){
-            $table->make_random_timetabeling();
-        }
-
-        for($i=0;$i<10;$i++){
-            $arr=$table->return_one_timetabeling();
-            $fit=$table->fitness_function($arr);
-            $table->change_fitness($fit,$arr);
-        }
-        $average=$table->fitness_averege();
-        $table->delete_bad_timetabeling($average);
-        $timetabelings=$table->matrice_of_timetabelings();
-        $table->crossing($timetabelings[0],$timetabelings[1]);
-                    return view('admin.timetabelings.index',compact('arr'));
+        return view('admin.timetabelings.index');
     }
 
     /**
@@ -107,5 +91,8 @@ class TimeTabelingController extends Controller
     public function destroy(TimeTabeling $timeTabeling)
     {
         //
+    }
+    public function new_generation(){
+
     }
 }

@@ -35,4 +35,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function (){
     Route::resource('years','Admin\YearController');
     Route::resource('sections','Admin\SectionController');
 });
-
+Route::get('/new_population', 'Controller@new_population')->name('new_population');
+Route::get('/best_timetabeling', 'Controller@best_timetabeling')->name('best_timetabeling');

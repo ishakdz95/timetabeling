@@ -9,25 +9,8 @@
 
                 <div class="card-body">
                     <br><br><br>
-                    <table>
-                        <tr class="text-light card-header">
-                            @forelse($arr as $item)
-                            <td>
-                                {{$item->day_name}}
-                                {{$item->timeslot_name}}<br>
-                                {{$item->room_name}}<br>
-                                {{$item->set_name}}<br>
-                                {{$item->professor_first_name}}<br>
-                                {{$item->cours_name}}<br>
-                                {{$item->type}}
-                            </td>
-
-                            @empty
-
-                            @endforelse
-                        </tr>
-                    </table>
-
+                    <a href="{{route('new_population')}}" class="btn btn-green">Make new generation</a>
+                    <a href="{{route('best_timetabeling')}}" class="btn btn-green">Best time tabeling</a>
                 </div>
             </div>
         </div>

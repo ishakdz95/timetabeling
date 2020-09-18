@@ -10,7 +10,7 @@ class Table extends Model
     public function make_random_timetabeling(){
 
         $timetabling=new TimeTabeling();
-        $professor=new Professor();
+        $timetabling->intial_professor_hour();
         $timetabling->dettach_timeslots();
         $seance_of_section=new Seance_of_Section();
         $seance_of_td=new Seance_of_Td();
@@ -24,13 +24,12 @@ class Table extends Model
         $timetabling->delete_seance();
         $timetabling->make_section_seance_without_professor();
         $timetabling->make_td_seance_without_professor();
-        $professor->intial_professor();
-        $professors=Professor::all();
         $seances=$timetabling->array_of_seances();
-        foreach ($professors as $professor) {
-            $hour=$professor->hour;
-            while ($hour>0){
+        $count=count($seances);
+        $table=new Table();
+        while ($seances!=null) {
                 try {
+                    $professor=$timetabling->random_professor();
                     $timetabling = new TimeTabeling();
                     $timetabling->day_id = $seances[0]->day_id;
                     $timetabling->day_name = $seances[0]->day_name;
@@ -50,16 +49,10 @@ class Table extends Model
                     $timetabling->fitness=1;
                     $timetabling->save();
                     array_shift($seances);
-                    shuffle($seances);
-                    $hour--;
                 }
                 catch (\Exception $e) {
                     return 'catch';
                 }
-
-            }
-
-
         }
 
     }
@@ -140,7 +133,7 @@ class Table extends Model
     public function delete_bad_timetabeling(int $average){
       $timetabelings=TimeTabeling::all();
       foreach ($timetabelings as $timetabeling){
-          if ($timetabeling->fitness>$average){
+          if (($timetabeling->fitness)>$average){
               $timetabeling->delete();
           }
       }
@@ -162,19 +155,16 @@ class Table extends Model
             $timetabeling->save();
         }
     }
-    public function semi_chromosome(array $arr){
+    public function semi_chromosome(){
         $table=new Table();
         $seances=Seance::all();
         $count=count($seances);
+        $array01 = $table->return_one_timetabeling();
         $array02=array();
         $i=0;
-        foreach ($arr as $item){
+        foreach ($array01 as $item){
             if ($i<$count/2){
-                $professor=new Professor();
-                $professor->id1=$item->professor_id;
-                $professor->first_name1=$item->professor_first_name;
-                $professor->last_name1=$item->professor_last_name;
-                $array02[$i]=$professor;
+                $array02[$i]=$item;
                 $i++;
             }
         }
@@ -190,11 +180,7 @@ class Table extends Model
         $i = 0;
         foreach ($array01 as $item) {
             if ($i >= $count / 2) {
-                $professor = new Professor();
-                $professor->id1 = $item->professor_id;
-                $professor->first_name1 = $item->professor_first_name;
-                $professor->last_name1 = $item->professor_last_name;
-                $array02[$i] = $professor;
+                $array02[$i] = $item;
             }
             $i++;
         }
@@ -233,4 +219,39 @@ class Table extends Model
         }
        return $arr;
     }
+
+public function intial_timetabelings(){
+        $timetabelings=TimeTabeling::all();
+        $i=1;
+        foreach ($timetabelings as $timetabeling){
+            $timetabeling->id=$i;
+            $timetabeling->available=true;
+            $timetabeling->save();
+            $i++;
+        }
+}
+public function save_new_chromosome(array $arr,int $fitness){
+        foreach ($arr as $item){
+           $timetabling=new TimeTabeling();
+            $timetabling->day_id = $item->day_id;
+            $timetabling->day_name = $item->day_name;
+            $timetabling->timeslot_id = $item->timeslot_id;
+            $timetabling->timeslot_name = $item->timeslot_name;
+            $timetabling->room_id = $item->room_id;
+            $timetabling->room_name = $item->room_name;
+            $timetabling->professor_id = $item->id;
+            $timetabling->professor_first_name = $item->professor_first_name;
+            $timetabling->professor_last_name = $item->professor_last_name;
+            $timetabling->cours_id = $item->cours_id;
+            $timetabling->cours_name = $item->cours_name;
+            $timetabling->set_id = $item->set_id;
+            $timetabling->set_name = $item->set_name;
+            $timetabling->type = $item->type;
+            $timetabling->available = $item->available;
+            $timetabling->fitness=$fitness;
+            $timetabling->save();
+        }
+
+}
+
 }

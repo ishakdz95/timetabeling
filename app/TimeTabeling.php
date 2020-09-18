@@ -149,5 +149,27 @@ class TimeTabeling extends Model
         }
         return $arr;
     }
+    public function intial_professor_hour(){
+        $professors=Professor::all();
+        foreach ($professors as $professor){
+            $professor->hour=6;
+            $professor->save();
+        }
+    }
+    public function random_professor(){
+        $bool=true;
+        while($bool==true) {
+            $professors = Professor::all();
+            $count = count($professors);
+            $rand = rand(0, $count - 1);
+            $professor = $professors[$rand];
+            if ($professor->hour > 0) {
+                $professor->hour = $professor->hour - 1;
+                $professor->save();
+                $bool = false;
+                return $professor;
+            }
+        }
 
+    }
 }
