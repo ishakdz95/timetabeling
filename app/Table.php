@@ -25,33 +25,36 @@ class Table extends Model
         $timetabling->make_section_seance_without_professor();
         $timetabling->make_td_seance_without_professor();
         $seances=$timetabling->array_of_seances();
-        dd($seances);
+
         $count=count($seances);
         $table=new Table();
         while ($seances!=null) {
                 try {
                     $professor=$timetabling->random_professor();
-                    $timetabling = new TimeTabeling();
-                    $timetabling->day_id = $seances[0]->day_id;
-                    $timetabling->day_name = $seances[0]->day_name;
-                    $timetabling->timeslot_id = $seances[0]->timeslot_id;
-                    $timetabling->timeslot_name = $seances[0]->timeslot_name;
-                    $timetabling->room_id = $seances[0]->room_id;
-                    $timetabling->room_name = $seances[0]->room_name;
-                    $timetabling->professor_id = $professor->id;
-                    $timetabling->professor_first_name = $professor->first_name;
-                    $timetabling->professor_last_name = $professor->last_name;
-                    $timetabling->cours_id = $seances[0]->cours_id;
-                    $timetabling->cours_name = $seances[0]->cours_name;
-                    $timetabling->set_id = $seances[0]->set_id;
-                    $timetabling->set_name = $seances[0]->set_name;
-                    $timetabling->type = $seances[0]->type;
-                    $timetabling->available = $seances[0]->available;
-                    $timetabling->fitness=1;
-                    $professor->hour = $professor->hour - 1;
-                    $professor->save();
-                    $timetabling->save();
-                    array_shift($seances);
+                    if ($professor->type==$seances[0]->priority){
+                        $timetabling = new TimeTabeling();
+                        $timetabling->day_id = $seances[0]->day_id;
+                        $timetabling->day_name = $seances[0]->day_name;
+                        $timetabling->timeslot_id = $seances[0]->timeslot_id;
+                        $timetabling->timeslot_name = $seances[0]->timeslot_name;
+                        $timetabling->room_id = $seances[0]->room_id;
+                        $timetabling->room_name = $seances[0]->room_name;
+                        $timetabling->professor_id = $professor->id;
+                        $timetabling->professor_first_name = $professor->first_name;
+                        $timetabling->professor_last_name = $professor->last_name;
+                        $timetabling->cours_id = $seances[0]->cours_id;
+                        $timetabling->cours_name = $seances[0]->cours_name;
+                        $timetabling->set_id = $seances[0]->set_id;
+                        $timetabling->set_name = $seances[0]->set_name;
+                        $timetabling->type = $seances[0]->type;
+                        $timetabling->available = $seances[0]->available;
+                        $timetabling->fitness=1;
+                        $professor->hour = $professor->hour - 1;
+                        $professor->save();
+                        $timetabling->save();
+                        array_shift($seances);
+                    }
+
                 }
                 catch (\Exception $e) {
                     return 'catch';
