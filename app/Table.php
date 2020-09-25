@@ -207,23 +207,30 @@ class Table extends Model
         }
         return $array02;
     }
-    public function matrice_of_timetabelings(){
-        $seances=Seance::all();
-        $count=count($seances);
-        $timetabelings=TimeTabeling::all();
-        $i=0;
-        $j=0;
-        foreach ($timetabelings as $timetabeling){
-                $arr[$i][$j]=$timetabeling;
-                $j++;
-                $count--;
-                if ($count==0){
-                    $count=count($seances);
-                    $i++;
-                    $j=0;
-                }
-        }
-       return $arr;
+    public function matrice_of_timetabelings(array $arr){
+        $timeslots=Timeslot::all();
+        $days=Day::all();
+            foreach ($arr as $item){
+              foreach ($days as $day){
+                  foreach ($timeslots as $timeslot){
+                      $j=0;
+                      if ($item->day_id==$day->id){
+                          if ($item->timeslot_id==$timeslot->id){
+                            $arr[$i][$j]=$item;
+                          }
+                          $j++;
+                      }
+                      $i++;
+                  }
+              }
+
+            }
+       dd($arr);
+    }
+    public function order(Array $arr){
+        $timeslot_id = array_column($arr, 'timeslot_id');
+        array_multisort($timeslot_id, SORT_ASC, $arr);
+        return $arr;
     }
 
 public function intial_timetabelings(){
@@ -257,7 +264,89 @@ public function save_new_chromosome(array $arr,int $fitness){
             $timetabling->fitness=$fitness;
             $timetabling->save();
         }
-
 }
+public function return_best_timetabeling(){
+        $timetabelings=TimeTabeling::all();
+        $seances=Seance::all();
+        $count=count($seances);
+        $j=0;
+        foreach ($timetabelings as $timetabeling){
+            if ($timetabeling->fitness==0){
+                $i=$timetabeling->id-1;
+                while($count>0){
+                    $arr[$j]=$timetabelings[$i];
+                    $i++;
+                    $j++;
+                    $count--;
+                }
+                return $arr;
+
+            }
+        }
+}
+public function make_available_false(){
+    $timetabelings=TimeTabeling::all();
+    $i=1;
+    foreach ($timetabelings as $timetabeling){
+        $timetabeling->id=$i;
+        $timetabeling->available=false;
+        $timetabeling->save();
+        $i++;
+    }
+}
+public function delete_unavailable_timetabeling(){
+        $timetabelings=TimeTabeling::all();
+        foreach ($timetabelings as $timeTabeling){
+            if ($timeTabeling->available==false){
+                $timeTabeling->delete();
+            }
+        }
+}
+    public function return_group_timetabeling(int $group_id,array $arr){
+        $groups=Group::all();
+        $array=[];
+        $i=0;
+        foreach ($arr as $item){
+            $seance_of_group=new Seance_of_group();
+            if ($item->type=='Cours'){
+                if($groups->get($group_id)->section->id==$item->set_id){
+                   $seance_of_group->day_id=$item->day_id;
+                   $seance_of_group->day_name=$item->day_name;
+                    $seance_of_group->timeslot_id=$item->timeslot_id;
+                    $seance_of_group->timeslot_name=$item->timeslot_name;
+                    $seance_of_group->professor_id=$item->professor_id;
+                    $seance_of_group->professor_first_name=$item->professor_first_name;
+                    $seance_of_group->professor_last_name=$item->professor_last_name;
+                    $seance_of_group->section_id=$item->set_id;
+                    $seance_of_group->section_name=$item->set_name;
+                    $seance_of_group->cours_id=$item->cours_id;
+                    $seance_of_group->cours_name=$item->cours_name;
+                    $seance_of_group->type=$item->type;
+                    $array[$i]=$seance_of_group;
+                    $i++;
+                }
+            }
+            else{
+                if ($group_id==$item->set_id){
+                    $seance_of_group->day_id=$item->day_id;
+                    $seance_of_group->day_name=$item->day_name;
+                    $seance_of_group->timeslot_id=$item->timeslot_id;
+                    $seance_of_group->timeslot_name=$item->timeslot_name;
+                    $seance_of_group->professor_id=$item->professor_id;
+                    $seance_of_group->professor_first_name=$item->professor_first_name;
+                    $seance_of_group->professor_last_name=$item->professor_last_name;
+                    $seance_of_group->section_id=$item->set_id;
+                    $seance_of_group->section_name=$item->set_name;
+                    $seance_of_group->cours_id=$item->cours_id;
+                    $seance_of_group->cours_name=$item->cours_name;
+                    $seance_of_group->type=$item->type;
+                    $array[$i]=$seance_of_group;
+                    $i++;
+                }
+            }
+
+        }
+        return $array;
+    }
 
 }

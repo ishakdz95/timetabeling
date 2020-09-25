@@ -19,4 +19,8 @@ class Group extends Model
     {
         return $this->belongsToMany(Course::class);
     }
+    public function seance_of_groups()
+    {
+        return $this->belongsToMany(Seance_of_group::class);
+    }
 }

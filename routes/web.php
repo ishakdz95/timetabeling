@@ -37,3 +37,5 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function (){
 });
 Route::get('/new_population', 'Controller@new_population')->name('new_population');
 Route::get('/best_timetabeling', 'Controller@best_timetabeling')->name('best_timetabeling');
+Route::get('/final_timetabeling', 'Controller@final_timetabeling')->name('final_timetabeling');
+Route::get('/group_timetabeling/{id}', 'Controller@group_timetabeling')->name('group_timetabeling');

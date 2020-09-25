@@ -30,6 +30,7 @@
 
                                     @endforeach
                                 </td>
+                                <td><a href="{{route('group_timetabeling',$group->id)}}" class="btn btn-info">Timetabeling</a><td>
                                 <td><a href="{{route('admin.groups.edit',$group->id)}}" class="btn btn-info">Edit</a><td>
                                 <form method="POST" action="{{route('admin.groups.destroy',$group->id)}}">
                                     @csrf
