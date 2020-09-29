@@ -1,24 +1,21 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Edit Section</div>
-
-                <div class="card-body">
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="card-body">
+        <h5 class="card-title">Edit Room</h5>
                    <form method="POST" action="{{route('admin.sections.update',$section->id)}}">
                        {{method_field('PUT')}}
                        @csrf
-                       <label class="text-light">Name Of Section:</label>
+                       <label >Name Of Section:</label>
                        <input type="text" name="name" value="{{$section->name}}" class="form-control"/>
-                       <br/><br/>
-                       <input type="submit" value="Save" class="btn btn-green"/>
+                       <label >Year :</label>
+                       <select class="form-control " name="day_id">
+                           @foreach($years as $year)
+                               <option value="{{$year->id}}">{{$year->name}}</option>
+                           @endforeach
+
+                       </select>
+                       <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

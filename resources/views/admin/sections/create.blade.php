@@ -1,18 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Add New Section</div>
-
-                <div class="card-body">
+@section('main-section')
+    <div class="card-body"><h5 class="card-title">New Section</h5>
                    <form method="POST" action="{{route('admin.sections.store')}}">
                        @csrf
-                       <label class="text-light">Name Of Section:</label>
+                       <label >Name Of Section:</label>
                        <input type="text" name="name" class="form-control"/>
-                       <label class="text-light">Year:</label>
+                       <label >Year:</label>
                        <select class="form-control " name="year_id">
                            @foreach($years as $year)
                                <option value="{{$year->id}}">{{$year->name}}</option>
@@ -20,11 +14,7 @@
 
                        </select>
                        <br/><br/>
-                       <input type="submit" value="save" class="btn btn-green"/>
+                       <input type="submit" value="save" class="mt-1 btn btn-primary"/>
                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

@@ -1,33 +1,27 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Sections</div>
-
-                <div class="card-body">
-                    <a href="{{route('admin.sections.create')}}" class="btn btn-green">Add New Section</a>
-                    <br><br><br>
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="col-lg-8">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Timeslots</h5>
+                <br>
                     <table class="table">
                         <tr>
-                            <th class="text-light">Section name</th>
-                            <th class="text-light">Year</th>
+                            <th >Section name</th>
+                            <th >Year</th>
+                            <th >Timetabeling</th>
                             <th></th>
                             <th></th>
                         </tr>
                         @forelse($sections as $section)
                             <tr>
-                                <td class="text-light">{{$section->name}}</td>
-                                <td class="text-light">
+                                <td >{{$section->name}}</td>
+                                <td >
                                     {{$section->year->name}}
                                 </td>
-                                <td class="text-light">
-                                    @foreach($section->timeslots as $timeslot)
-                                        {{$timeslot->name}}
-                                        {{$timeslot->day->name}}
-                                    @endforeach
+                                <td >
+                                    <a href="#" class="mb-2 mr-2 btn btn-secondary">Timetabeling</a>
                                 </td>
                                 <td><a href="{{route('admin.sections.edit',$section->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.sections.destroy',$section->id)}}">
@@ -38,7 +32,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td class="text-light" colspan="2"> no sections found.</td>
+                                <td colspan="2"> no sections found.</td>
 
                             </tr>
                         @endforelse
@@ -46,6 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    <a href="{{route('admin.sections.create')}}" class="mb-2 mr-2 btn btn-success">Add New</a>
+
 @endsection

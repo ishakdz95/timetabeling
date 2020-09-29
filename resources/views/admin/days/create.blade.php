@@ -1,16 +1,11 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Add New Day</div>
-
-                <div class="card-body">
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="card-body">
+        <h5 class="card-title">New Day</h5>
                    <form method="POST" action="{{route('admin.days.store')}}">
                        @csrf
-                       <label class="text-light">Name Of Day:</label>
+                       <label >Name Of Day:</label>
                        <select class="form-control" name="name">
                            <option value="Saturday">Saturday</option>
                            <option value="Sunday">Sunday</option>
@@ -20,11 +15,7 @@
                            <option value="Thursday">Thursday</option>
                        </select>
                        <br/><br/>
-                       <input type="submit" value="save" class="btn btn-green"/>
+                       <input type="submit" value="save" class="mt-1 btn btn-primary"/>
                    </form>
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 @endsection

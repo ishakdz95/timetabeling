@@ -1,46 +1,36 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Add New Professor</div>
-
-                <div class="card-body">
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="card-body">
+        <h5 class="card-title">New Professor</h5>
                    <form method="POST" action="{{route('admin.professors.store')}}">
                        @csrf
-                       <label class="text-light">First Name:</label>
+                       <label >First Name:</label>
                        <input type="text" name="first_name" class="form-control"/>
-                       <label class="text-light">Last Name:</label>
+                       <label >Last Name:</label>
                        <input type="text" name="last_name" class="form-control"/>
-                       <label class="text-light">Grade:</label>
+                       <label >Grade:</label>
                        <select class="form-control" name="grade" >
                            <option value="A1">A1</option>
                            <option value="A2">A2</option>
                            <option value="A3">A3</option>
                        </select>
-                       <label class="text-light">Type:</label>
+                       <label>Type:</label>
                        <select class="form-control" name="type" >
                            <option value="A">A</option>
                            <option value="B">B</option>
                        </select>
                        <br>
-                       <label class="text-light">Sex:</label>
+                       <label >Sex:</label>
                        <input type="radio" id="male" name="sex" value="male">
-                       <label class="text-light" for="male">Male</label>
+                       <label  for="male">Male</label>
                        <input type="radio" id="female" name="sex" value="female">
-                       <label class="text-light" for="female">Female</label>
+                       <label  for="female">Female</label>
                        <div type="hidden">
                            <input type="hidden" id="available" name="available" value="1" >
                        </div>
                        <br/><br/>
-                       <input type="submit" value="save" class="btn btn-green"/>
-
+                       <input type="submit" value="save" class="mt-1 btn btn-primary"/>
                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

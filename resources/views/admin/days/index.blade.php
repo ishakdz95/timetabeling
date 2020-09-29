@@ -1,31 +1,28 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Days</div>
-
-                <div class="card-body">
-                    <a href="{{route('admin.days.create')}} " class="btn btn-green">Add New Day</a>
-                    <br><br><br>
-                    <table class="table">
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="col-lg-8">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Days</h5>
+                <table class="mb-0 table">
                         <tr>
-                            <th class="text-light">Nam of Day</th>
+                            <th >#</th>
+                            <th >Nam of Day</th>
                             <th></th>
                             <th></th>
                         </tr>
 
                         @forelse($days as $day)
                             <tr>
-                                <td class="text-light">
+                                <td >{{$day->id}}</td>
+                                <td >{{$day->name}}</td>
+                                <td>
                                     @foreach($day->timeslots as $timeslot)
                                         {{$timeslot->name}}
                                     @endforeach
 
                                 </td>
-                                <td class="text-light">{{$day->name}}</td>
                                 <td><a href="{{route('admin.days.edit',$day->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.days.destroy',$day->id)}}">
                                         @csrf
@@ -39,13 +36,10 @@
                             </tr>
                         @endforelse
 
-
-
-
                     </table>
                 </div>
-            </div>
         </div>
-    </div>
-</div>
+
+        <a href="{{route('admin.days.create')}} " class="mb-2 mr-2 btn btn-success">Add New</a>
+            </div>
 @endsection

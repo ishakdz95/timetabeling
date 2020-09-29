@@ -43,13 +43,6 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-       /* $requestdata=$request->all();
-        for($i=0;$i<7;$i++)
-        {
-            $requestdata['name']='first year'.$i;
-            Course::create($requestdata);
-        }
-       */
         Course::create($request->all());
         return redirect()->route('admin.courses.index');
     }
@@ -73,7 +66,8 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        return view('admin.courses.edit',compact('course'));
+        $years=Year::all();
+        return view('admin.courses.edit',compact('course','years'));
     }
 
     /**

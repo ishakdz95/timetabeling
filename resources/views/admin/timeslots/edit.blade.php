@@ -1,19 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Edit TimeSlot</div>
-
-                <div class="card-body">
+@section('main-section')
+    <div class="card-body"><h5 class="card-title">Edit Timeslot</h5>
                    <form method="POST" action="{{route('admin.timeslots.update',$timeslot->id)}}">
                        {{method_field('PUT')}}
                        @csrf
-                       <label class="text-light">TimeSlot:</label>
+                       <label >TimeSlot:</label>
                        <input type="text" name="name" value="{{$timeslot->name}}" class="form-control"/>
-                       <label class="text-light">Day:</label>
+                       <label >Day:</label>
                        <select class="form-control " name="day_id">
                            @foreach($days as $day)
                                <option value="{{$day->id}}">{{$day->name}}</option>
@@ -21,11 +15,8 @@
 
                        </select>
                        <br/><br/>
-                       <input type="submit" value="Save" class="btn btn-green"/>
+                       <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 @endsection

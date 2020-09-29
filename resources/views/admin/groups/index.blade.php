@@ -1,36 +1,25 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Groups</div>
-
-                <div class="card-body">
-                    <a href="{{route('admin.groups.create')}}" class="btn btn-green">Add New Group</a>
-                    <br><br><br>
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="col-lg-8">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Groups</h5>
                     <table class="table">
                         <tr>
-                            <th class="text-light">Course</th>
-                            <th class="text-light">Section</th>
+                            <th >Group</th>
+                            <th >Section</th>
+                            <th >TimeTabeling</th>
                             <th></th>
                             <th></th>
                         </tr>
                         @forelse($groups as $group)
                             <tr>
-                                <td class="text-light">{{$group->name}}</td>
-                                <td class="text-light">
+                                <td >{{$group->name}}</td>
+                                <td >
                                     {{$group->section->name}}
                                 </td>
-                                <td class="text-light">
-                                    @foreach($group->timeslots as $timeslot)
-                                        {{$timeslot->name}}
-                                        {{$timeslot->day->name}}
-
-                                    @endforeach
-                                </td>
-                                <td><a href="{{route('group_timetabeling',$group->id)}}" class="btn btn-info">Timetabeling</a><td>
+                                <td><a href="{{route('group_timetabeling',$group->id)}}" class="mb-2 mr-2 btn btn-secondary">Timetabeling</a><td>
                                 <td><a href="{{route('admin.groups.edit',$group->id)}}" class="btn btn-info">Edit</a><td>
                                 <form method="POST" action="{{route('admin.groups.destroy',$group->id)}}">
                                     @csrf
@@ -40,13 +29,12 @@
                             </tr>
                         @empty
                             <tr>
-                                <td class="text-light" colspan="2"> No Groups Found.</td>
+                                <td  colspan="2"> No Groups Found.</td>
                             </tr>
                         @endforelse
                         </table>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    <a href="{{route('admin.groups.create')}}" class="mb-2 mr-2 btn btn-success">Add New </a>
 @endsection

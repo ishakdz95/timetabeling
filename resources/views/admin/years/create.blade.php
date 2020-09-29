@@ -1,24 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.master')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Add New Year</div>
-
-                <div class="card-body">
+@section('main-section')
+    <div class="card-body"><h5 class="card-title">New Year</h5>
                    <form method="POST" action="{{route('admin.years.store')}}">
                        @csrf
-                       <label class="text-light">Year:</label>
+                       <label >Year:</label>
                        <input type="text" name="name" class="form-control"/>
-
                        <br/><br/>
-                       <input type="submit" value="save" class="btn btn-green"/>
+                       <input type="submit" value="save" class="mb-2 mr-2 btn btn-success"/>
                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

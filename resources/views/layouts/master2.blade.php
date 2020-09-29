@@ -70,19 +70,19 @@
                 </div>
                 <ul class="header-menu nav">
                     <li class="nav-item">
-                        <a href="{{route('new_population')}}" class="nav-link">
+                        <a href="javascript:void(0);" class="nav-link">
                             <i class="nav-link-icon fa fa-database"> </i>
-                            Make new population
+                            Make new generation
                         </a>
                     </li>
                     <li class="btn-group nav-item">
-                        <a href="{{route('best_timetabeling')}}" class="nav-link">
+                        <a href="javascript:void(0);" class="nav-link">
                             <i class="nav-link-icon fa fa-edit"></i>
                             Best timetables
                         </a>
                     </li>
                     <li class="dropdown nav-item">
-                        <a href="{{route('final_timetabeling')}}" class="nav-link">
+                        <a href="javascript:void(0);" class="nav-link">
                             <i class="nav-link-icon fa fa-cog"></i>
                             final timetable
                         </a>
@@ -100,7 +100,8 @@
                                         <img width="42" class="rounded-circle" src="assets/images/avatars/1.jpg" alt="">
                                         <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                     </a>
-                                    <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
+                                    <div tabindex="-1" role="menu" aria-hidden="true"
+                                         class="dropdown-menu dropdown-menu-right">
 {{--                                        <button type="button" tabindex="0" class="dropdown-item">User Account</button>--}}
 {{--                                        <button type="button" tabindex="0" class="dropdown-item">Settings</button>--}}
 {{--                                        <h6 tabindex="-1" class="dropdown-header">Header</h6>--}}

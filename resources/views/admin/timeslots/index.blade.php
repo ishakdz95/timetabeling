@@ -1,25 +1,22 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Time Slot</div>
-
-                <div class="card-body">
-                    <a href="{{route('admin.timeslots.create')}}" class="btn btn-green">Add new Time Slot</a>
-                    <br><br><br>
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="col-lg-8">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Timeslots</h5>
+                    <br>
                     <table class="table">
                         <tr>
-                            <th class="text-light">Time Slot</th>
+                            <th >Time Slot</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         </tr>
                         @forelse($timeslots as $timeslot)
                             <tr>
-                                <td class="text-light">{{$timeslot->name}}</td>
-                                <td class="text-light">{{$timeslot->day->name}}</td>
+                                <td >{{$timeslot->name}}</td>
+                                <td >{{$timeslot->day->name}}</td>
 
                                 <td><a href="{{route('admin.timeslots.edit',$timeslot->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.timeslots.destroy',$timeslot->id)}}">
@@ -34,9 +31,9 @@
                             </tr>
                         @endforelse
                         </table>
+                <a href="{{route('admin.timeslots.create')}}" class="mb-2 mr-2 btn btn-success">Add New</a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 @endsection

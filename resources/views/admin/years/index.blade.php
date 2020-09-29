@@ -1,24 +1,20 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Years</div>
-
-                <div class="card-body">
-                    <a href="{{route('admin.years.create')}}" class="btn btn-green">Add new Year</a>
-                    <br><br><br>
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="col-lg-8">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Years</h5>
+                <br>
                     <table class="table">
                         <tr>
-                            <th class="text-light">Years</th>
+                            <th >Years</th>
                             <th></th>
                             <th></th>
                         </tr>
                         @forelse($years as $year)
                             <tr>
-                                <td class="text-light">{{$year->name}}</td>
+                                <td >{{$year->name}}</td>
                                 <td><a href="{{route('admin.years.edit',$year->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.years.destroy',$year->id)}}">
                                         @csrf
@@ -36,6 +32,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    <a href="{{route('admin.years.create')}}" class="mb-2 mr-2 btn btn-success">Add New</a>
 @endsection

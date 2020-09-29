@@ -62,7 +62,8 @@ class SectionController extends Controller
      */
     public function edit(section $section)
     {
-        return view('admin.sections.edit',compact('section'));
+        $years=Year::all();
+        return view('admin.sections.edit',compact('section','years'));
     }
 
     /**

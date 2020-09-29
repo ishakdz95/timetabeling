@@ -1,11 +1,11 @@
-@extends('layouts.app')
-
-@section('content')
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="text-light card-header">Dashboard</div>
+                <div class=" card-header">Dashboard</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    <p class="text-light">Welcome to timetabeling generator</p>
+                    <p >Welcome to timetabeling generator</p>
                 </div>
             </div>
         </div>

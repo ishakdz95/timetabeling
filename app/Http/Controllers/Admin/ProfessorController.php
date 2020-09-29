@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Course;
 use App\Professor;
 use App\Timeslot;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class ProfessorController extends Controller
      */
     public function create()
     {
-        return view('admin.professors.create');
+        $courses=Course::all();
+        return view('admin.professors.create',compact('courses'));
 
     }
 

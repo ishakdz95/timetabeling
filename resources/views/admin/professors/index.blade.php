@@ -1,40 +1,33 @@
-@extends('layouts.app')
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="col-lg-8">
+        <div class="main-card mb-3 card">
+            <div class="card-body">
+                <h5 class="card-title">Professors</h5>
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Professors</div>
-
-                <div class="card-body">
-                    <a href="{{route('admin.professors.create')}} " class="btn btn-green">Add new professor</a>
-                    <br><br><br>
                     <table class="table">
                         <tr>
-                            <th class="text-light">First name</th>
-                            <th class="text-light">Last name</th>
-                            <th class="text-light">Grade</th>
-                            <th class="text-light">Type</th>
-                            <th class="text-light">Sex</th>
-                            <th class="text-light">Time Slots</th>
+                            <th>First name</th>
+                            <th >Last name</th>
+                            <th >Grade</th>
+                            <th >Type</th>
+                            <th >Sex</th>
+                            <th >TimeTabeling</th>
                             <th></th>
                             <th></th>
                         </tr>
 
                         @forelse($professors as $professor)
                             <tr>
-                                <td class="text-light">{{$professor->first_name}}</td>
-                                <td class="text-light">{{$professor->last_name}}</td>
-                                <td class="text-light">{{$professor->grade}}</td>
-                                <td class="text-light">{{$professor->type}}</td>
-                                <td class="text-light">{{$professor->sex}}</td>
-                                <td class="text-light">
-                                    @foreach($professor->timeslots as $timeslot)
-                                        {{$timeslot->day->name}}
-                                        {{$timeslot->name}}
-                                   @endforeach
-                                   </td>
+                                <td >{{$professor->first_name}}</td>
+                                <td >{{$professor->last_name}}</td>
+                                <td >{{$professor->grade}}</td>
+                                <td >{{$professor->ype}}</td>
+                                <td >{{$professor->sex}}</td>
+                                <td >
+                                    <a href="#" class="mb-2 mr-2 btn btn-secondary">Timetabeling</a>
+                                </td>
 
                                 <td><a href="{{route('admin.professors.edit',$professor->id)}}" class="btn btn-info">Edit</a><td>
                                     <form method="POST" action="{{route('admin.professors.destroy',$professor->id)}}">
@@ -46,13 +39,13 @@
 
                         @empty
                             <tr>
-                                <td class="text-light" colspan="2"> No Professors Found.</td>
+                                <td  colspan="2"> No Professors Found.</td>
                             </tr>
                         @endforelse
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    <a href="{{route('admin.professors.create')}} " class="mb-2 mr-2 btn btn-success">Add New</a>
+    <br><br><br>
 @endsection

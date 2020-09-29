@@ -1,31 +1,22 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="text-light card-header">Edit Room</div>
-
-                <div class="card-body">
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
+    <div class="card-body">
+        <h5 class="card-title">Edit Room</h5>
                    <form method="POST" action="{{route('admin.rooms.update',$room->id)}}">
                        {{method_field('PUT')}}
                        @csrf
-                       <label class="text-light">Code Of Room:</label>
+                       <label >Code Of Room:</label>
                        <input type="text" name="code" value="{{$room->code}}" class="form-control"/>
                        <br/>
-                       <label class="text-light">Type Of Room:</label>
+                       <label >Type Of Room:</label>
                        <select class="form-control" name="type">
                            <option value="{{$room->type}}">{{$room->type}}</option>
                            <option value="Cours">lecture hall</option>
                            <option value="TD">TD room</option>
                            <option value="TP">laboratory</option>
                        </select>
-                       <input type="submit" value="Save" class="btn btn-green"/>
+                       <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
                    </form>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

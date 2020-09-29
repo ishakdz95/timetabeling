@@ -70,7 +70,7 @@ class Controller extends BaseController
                     $j++;
                     $count--;
                 }
-                return redirect()->route('admin.timetabelings.index');
+
             }
         }
 
