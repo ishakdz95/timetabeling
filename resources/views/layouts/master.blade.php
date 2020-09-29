@@ -25,7 +25,7 @@
 </head>
 
 <body>
-<div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+<div id="app" class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
     <div class="app-header header-shadow">
         <div class="app-header__logo">
             <div class="logo-src"></div>
@@ -516,6 +516,7 @@
 
     </div>
 </div>
+<script  src="{{ asset('js/app.js')}}"></script>
 <script type="text/javascript" src="{{ asset('assets/scripts/main.js')}}"></script>
 
 </body>

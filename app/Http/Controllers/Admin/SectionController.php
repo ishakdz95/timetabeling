@@ -16,8 +16,9 @@ class SectionController extends Controller
      */
     public function index()
     {
-        $sections=Section::all();
-        return view('admin.sections.index',compact('sections'));
+        $years= Year::with('sections')->get();
+        $sections=Section::with('year')->get();
+        return view('admin.sections.index',compact('sections' , 'years' ));
     }
 
     /**
