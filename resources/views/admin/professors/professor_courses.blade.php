@@ -3,34 +3,23 @@
 @section('main-section')
     <div class="card-body">
         <h5 class="card-title">New Professor</h5>
-        <form method="POST" action="{{route('admin.professors.store')}}">
+        <form method="GET" action="{{route('attache_professor_course')}}">
             @csrf
-            <label >First Name:</label>
-            <input type="text" name="first_name" class="form-control"/>
-            <label >Last Name:</label>
-            <input type="text" name="last_name" class="form-control"/>
-            <label >Grade:</label>
-            <select class="form-control" name="grade" >
-                <option value="A1">A1</option>
-                <option value="A2">A2</option>
-                <option value="A3">A3</option>
+            <input type="hidden" name="id" value="{{$professor->id}}">
+            <input name="first_name" value="{{$professor->first_name}}" class="form-control" readonly><br>
+            <input name="first_name" value="{{$professor->last_name}}" class="form-control" readonly><br>
+            <input name="first_name" value="{{$professor->grade}}" class="form-control" readonly><br>
+            <input name="first_name" value="{{$professor->sex}}" class="form-control" readonly><br>
+            <br/>
+
+            <label >Select a course:</label>
+            <select class="form-control " name="course_id">
+                @foreach($courses as $course)
+                    <option value="{{$course->id}}">{{$course->name}}</option>
+                @endforeach
+
             </select>
-            <label>Type:</label>
-            <select class="form-control" name="type" >
-                <option value="A">A</option>
-                <option value="B">B</option>
-            </select>
-            <br>
-            <label >Sex:</label>
-            <input type="radio" id="male" name="sex" value="male">
-            <label  for="male">Male</label>
-            <input type="radio" id="female" name="sex" value="female">
-            <label  for="female">Female</label>
-            <div type="hidden">
-                <input type="hidden" id="available" name="available" value="1" >
-            </div>
-            <br/><br/>
-            <input type="submit" value="save" class="mt-1 btn btn-primary"/>
+            <input  type="submit" value="submit" class="mt-1 btn btn-primary"/>
         </form>
     </div>
 @endsection

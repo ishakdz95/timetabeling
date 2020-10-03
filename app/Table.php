@@ -321,6 +321,8 @@ public function delete_unavailable_timetabeling(){
                     $seance_of_group->section_name=$item->set_name;
                     $seance_of_group->cours_id=$item->cours_id;
                     $seance_of_group->cours_name=$item->cours_name;
+                    $seance_of_group->room_id=$item->room_id;
+                    $seance_of_group->room_name=$item->room_name;
                     $seance_of_group->type=$item->type;
                     $array[$i]=$seance_of_group;
                     $i++;
@@ -339,6 +341,8 @@ public function delete_unavailable_timetabeling(){
                     $seance_of_group->section_name=$item->set_name;
                     $seance_of_group->cours_id=$item->cours_id;
                     $seance_of_group->cours_name=$item->cours_name;
+                    $seance_of_group->room_id=$item->room_id;
+                    $seance_of_group->room_name=$item->room_name;
                     $seance_of_group->type=$item->type;
                     $array[$i]=$seance_of_group;
                     $i++;

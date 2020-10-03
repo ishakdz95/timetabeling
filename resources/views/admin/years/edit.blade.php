@@ -8,7 +8,8 @@
                        <label >Year:</label>
                        <input type="text" name="name" value="{{$year->name}}" class="form-control"/>
                        <br/><br/>
-                       <input type="submit" value="Save" class="mb-2 mr-2 btn btn-success"/>
+                       <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.years.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
     </div>
 @endsection

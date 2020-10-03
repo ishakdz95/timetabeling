@@ -24,6 +24,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('sections-component', require('./components/Sections.vue').default);
+Vue.component('groups-component', require('./components/Groups.vue').default);
 Vue.component('addbutton-component', require('./components/elements/addButton').default);
 
 /**

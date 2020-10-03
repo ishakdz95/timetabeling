@@ -7,7 +7,7 @@
                        {{method_field('PUT')}}
                        @csrf
                        <label>Group Name:</label>
-                       <input type="text" name="name" value="{{$group->name}}" class="form-control"/>
+                       <input type="text" name="name" value="{{$group->name}}" class="form-control" required/>
                        <label>Section Name:</label>
                        <select class="form-control " name="section_id">
                            <option value="{{$group->section->id}}">{{$group->section->name}}</option>
@@ -18,6 +18,7 @@
                        </select>
                        <br/><br/>
                        <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.groups.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 @endsection

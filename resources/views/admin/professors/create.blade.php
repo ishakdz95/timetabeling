@@ -6,9 +6,9 @@
                    <form method="POST" action="{{route('admin.professors.store')}}">
                        @csrf
                        <label >First Name:</label>
-                       <input type="text" name="first_name" class="form-control"/>
+                       <input type="text" name="first_name" class="form-control" required/>
                        <label >Last Name:</label>
-                       <input type="text" name="last_name" class="form-control"/>
+                       <input type="text" name="last_name" class="form-control" required/>
                        <label >Grade:</label>
                        <select class="form-control" name="grade" >
                            <option value="A1">A1</option>
@@ -16,7 +16,7 @@
                            <option value="A3">A3</option>
                        </select>
                        <label>Type:</label>
-                       <select class="form-control" name="type" >
+                       <select class="form-control" name="type" required>
                            <option value="A">A</option>
                            <option value="B">B</option>
                        </select>
@@ -31,6 +31,7 @@
                        </div>
                        <br/><br/>
                        <input type="submit" value="save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.professors.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 @endsection

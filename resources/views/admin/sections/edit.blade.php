@@ -7,7 +7,7 @@
                        {{method_field('PUT')}}
                        @csrf
                        <label >Name Of Section:</label>
-                       <input type="text" name="name" value="{{$section->name}}" class="form-control"/>
+                       <input type="text" name="name" value="{{$section->name}}" class="form-control" required/>
                        <label >Year :</label>
                        <select class="form-control " name="day_id">
                            @foreach($years as $year)
@@ -16,6 +16,7 @@
 
                        </select>
                        <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.sections.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 @endsection

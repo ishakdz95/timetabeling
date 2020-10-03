@@ -15,7 +15,11 @@ class Professor extends Model
     {
         return $this->belongsToMany(Timeslot::class);
     }
-public function intial_professor(){
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+    public function intial_professor(){
         $professors=Professor::all();
         $i=1;
         foreach ($professors as $professor){

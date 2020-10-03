@@ -7,7 +7,7 @@
                        {{method_field('PUT')}}
                        @csrf
                        <label >Code Of Room:</label>
-                       <input type="text" name="code" value="{{$room->code}}" class="form-control"/>
+                       <input type="text" name="code" value="{{$room->code}}" class="form-control" required/>
                        <br/>
                        <label >Type Of Room:</label>
                        <select class="form-control" name="type">
@@ -17,6 +17,7 @@
                            <option value="TP">laboratory</option>
                        </select>
                        <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.rooms.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 @endsection

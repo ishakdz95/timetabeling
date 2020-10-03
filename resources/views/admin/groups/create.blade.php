@@ -6,7 +6,7 @@
                    <form method="POST" action="{{route('admin.groups.store')}}">
                        @csrf
                        <label >Name Of Group:</label>
-                       <input type="form-control text" name="name" class="form-control"/>
+                       <input type="form-control text" name="name" class="form-control" required/>
                        <label >Section:</label>
                        <select class="form-control " name="section_id">
                            @foreach($sections as $section)
@@ -16,6 +16,7 @@
                        </select>
                        <br/><br/>
                        <input type="submit" value="save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.groups.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 @endsection

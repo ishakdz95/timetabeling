@@ -23,4 +23,8 @@ class Course extends Model
     {
         return $this->belongsToMany(section::class);
     }
+    public function professors()
+    {
+        return $this->belongsToMany(Professor::class);
+    }
 }

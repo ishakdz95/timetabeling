@@ -46,6 +46,7 @@ class ProfessorController extends Controller
      */
     public function store(Request $request)
     {
+
         Professor::create($request->all());
         return redirect()->route('admin.professors.index');
     }
@@ -97,10 +98,5 @@ class ProfessorController extends Controller
         return redirect()->route('admin.professors.index');
 
     }
-    public function timeslot(Professor $professor)
-    {
 
-        return view('admin.professors.timeslot');
-
-    }
 }

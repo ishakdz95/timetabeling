@@ -5,7 +5,7 @@
                    <form method="POST" action="{{route('admin.sections.store')}}">
                        @csrf
                        <label >Name Of Section:</label>
-                       <input type="text" name="name" class="form-control"/>
+                       <input type="text" name="name" class="form-control" required/>
                        <label >Year:</label>
                        <select class="form-control " name="year_id">
                            @foreach($years as $year)
@@ -15,6 +15,7 @@
                        </select>
                        <br/><br/>
                        <input type="submit" value="save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.sections.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 @endsection

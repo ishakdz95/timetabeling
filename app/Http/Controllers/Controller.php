@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Group;
+use App\Professor;
 use App\Seance;
 use App\Seance_of_group;
 use App\Table;
@@ -10,6 +12,7 @@ use App\TimeTabeling;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use League\CommonMark\Extension\TaskList\TaskListItemMarker;
 
@@ -83,7 +86,18 @@ class Controller extends BaseController
         $arr=$table->return_best_timetabeling();
         $array=$table->order($arr);
         $arr=$table->return_group_timetabeling($id,$array);
-
         return view('admin.groups.timetabeling',compact('arr'));
+    }
+    public function professor_courses(int $id){
+        $professor=Professor::find($id);
+        $courses=Course::all();
+        return view('admin.professors.professor_courses',compact('professor','courses'));
+    }
+    public function attache_professor_course(Request $request){
+        $professor=Professor::find($request->id);
+        $course=Course::find($request->course_id);
+        $professor->courses()->syncWithoutDetaching($course);
+        $courses=Course::all();
+        return view('admin.professors.professor_courses',compact('professor','courses'));
     }
 }

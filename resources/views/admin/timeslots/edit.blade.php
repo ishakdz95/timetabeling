@@ -6,7 +6,15 @@
                        {{method_field('PUT')}}
                        @csrf
                        <label >TimeSlot:</label>
-                       <input type="text" name="name" value="{{$timeslot->name}}" class="form-control"/>
+                       <select class="form-control" name="name">
+                           <option value="{{$timeslot->id}}">{{$timeslot->name}}</option>
+                           <option value="08:00-09:30">08:00-09:30</option>
+                           <option value="09:30-11:00">09:30-11:00</option>
+                           <option value="11:00-12:30">11:00-12:30</option>
+                           <option value="12:30-14:00">12:30-14:00</option>
+                           <option value="14:00-15:30">14:00-15:30</option>
+                           <option value="15:30-17:00">15:30-17:00</option>
+                       </select>
                        <label >Day:</label>
                        <select class="form-control " name="day_id">
                            @foreach($days as $day)
@@ -16,6 +24,7 @@
                        </select>
                        <br/><br/>
                        <input type="submit" value="Save" class="mt-1 btn btn-primary"/>
+                       <a href="{{route('admin.timeslots.index')}} " class="mt-1 btn btn-warning">Cancel</a>
                    </form>
                 </div>
 

@@ -36,7 +36,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-light" colspan="2"> no courses found.</td>
+                            <td  colspan="2"> no courses found.</td>
                         </tr>
                     @endforelse
                     </tbody>

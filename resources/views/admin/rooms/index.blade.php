@@ -35,7 +35,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-light" colspan="2"> no rooms found.</td>
+                            <td  colspan="2"> no rooms found.</td>
                         </tr>
                     @endforelse
                     </tbody>

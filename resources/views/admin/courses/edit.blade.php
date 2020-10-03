@@ -34,6 +34,7 @@
                 </select>
             </div>
             <input type="submit" value="save" class="mt-1 btn btn-primary">
+            <a href="{{route('admin.courses.index')}} " class="mt-1 btn btn-warning">Cancel</a>
         </form>
     </div>
 @endsection

@@ -20,6 +20,7 @@
                 <input type="hidden" id="available" name="available" value="1" >
             </div>
             <input type="submit" value="save" class="mt-1 btn btn-primary">
+            <a href="{{route('admin.rooms.index')}} " class="mt-1 btn btn-warning">Cancel</a>
         </form>
     </div>
 @endsection
