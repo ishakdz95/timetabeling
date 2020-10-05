@@ -1,5 +1,4 @@
 <template>
-
     <div class="row">
         <div class="col-md-12">
             <div class="main-card mb-3 card">
@@ -29,10 +28,10 @@
                             </td>
                             <td class="text-center">{{section.name}}</td>
                             <td class="text-center">
-                                <button type="button" id="PopoverCustomT-0" class="btn btn-primary btn-sm">Details</button>
+                                <a :href="'groups/'+group.id+'/edit/'" class="btn btn-info">Edit</a>
                             </td>
                             <td class="text-center">
-                                <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
+                                <button @click="destroy(group)" type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
                             </td>
                         </tr>
                         </tbody>
@@ -44,10 +43,29 @@
     </div>
 </template>
 <script>
+    import notifModal from '../elements/notifModal'
+
     export default {
         props : ['section'],
+        components : {
+            notifModal,StackModal
+        },
         created() {
             console.log(this.section)
+        },
+
+        methods:{
+            destroy (group) {
+                // console.log('group' , group)
+                axios.delete(`groups/${group.id}`)
+                    .then(res => {
+                        // console.log('res >>>' , res);
+                        this.section.groups = this.section.groups.filter(grp => grp.id != group.id )
+                    }).catch(err => {
+                        console.log('err >>>' , err);
+                    })
+
+            }
         }
     }
 </script>

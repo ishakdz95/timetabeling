@@ -8,5 +8,5 @@
         ></addbutton-component>
         <sections-component :years="{{$years}}"> </sections-component>
     </div>
-
 @endsection
+
