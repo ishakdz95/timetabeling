@@ -3,36 +3,36 @@
     <div class="row">
         <div class="col-md-12">
             <div class="main-card mb-3 card">
-                <div class="card-header">Groups </div>
+                <div class="card-header">Timeslots </div>
                 <div class="table-responsive">
                     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
                             <th>Name</th>
-                            <th class="text-center">Section</th>
+                            <th class="text-center">Timeslots</th>
                             <th class="text-center">Edit</th>
                             <th class="text-center">Delete</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(group , index ) in section.groups" :key="index">
-                            <td class="text-center text-muted">#{{group.id}}</td>
+                        <tr v-for="(timeslot , index ) in day.timeslots" :key="index">
+                            <td class="text-center text-muted">#{{timeslot.id}}</td>
                             <td>
                                 <div class="widget-content p-0">
                                     <div class="widget-content-wrapper">
                                         <div class="widget-content-left flex2">
-                                            <div class="widget-heading">{{group.name}}</div>
+                                            <div class="widget-heading">{{timeslot.name}}</div>
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="text-center">{{section.name}}</td>
+                            <td class="text-center">{{day.name}}</td>
                             <td class="text-center">
-                                <button type="button" id="PopoverCustomT-0" class="btn btn-primary btn-sm">Details</button>
+                                <a :href="'timeslots/'+timeslot.id+'/edit/'" class="btn btn-info">Edit</a>
                             </td>
                             <td class="text-center">
-                                <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
+                                <button @click="destroy(timeslot)" class="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                         </tbody>
@@ -45,9 +45,18 @@
 </template>
 <script>
     export default {
-        props : ['section'],
+        props : ['day'],
         created() {
-            console.log(this.section)
+            console.log('day',this.day)
+        },
+        methods : {
+            destroy(timeslot){
+                axios.delete(`timeslots/${timeslot.id}`).then(res =>{
+                    console.log('response from destroy',res)
+                    this.day.timeslots=this.day.timeslots.filter(ts => ts.id != timeslot.id)
+                    }).catch(err =>console.log('error',err))
+            }
         }
     }
+
 </script>

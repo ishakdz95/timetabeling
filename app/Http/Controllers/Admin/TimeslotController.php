@@ -18,7 +18,9 @@ class TimeslotController extends Controller
     public function index()
     {
         $timeslots=Timeslot::all();
-        return view('admin.timeslots.index',compact('timeslots'));
+        $days=Day::with('timeslots')->get();
+
+        return view('admin.timeslots.index',compact('timeslots','days'));
     }
 
     /**
@@ -96,8 +98,8 @@ class TimeslotController extends Controller
      */
     public function destroy(Timeslot $timeslot)
     {
-        $timeslot->delete();
-        return redirect()->route('admin.timeslots.index');
+
+        return  $timeslot->delete();
 
     }
 }

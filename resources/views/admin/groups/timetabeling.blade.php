@@ -4,7 +4,7 @@
     <div class="col-lg-10">
         <div class="main-card mb-3 card">
             <div class="card-body">
-                <h5 class="card-title">Group timetabeling</h5>
+                <h5 class="card-title">Groups</h5>
 
                 <table class="table">
                    {{--<tr>
