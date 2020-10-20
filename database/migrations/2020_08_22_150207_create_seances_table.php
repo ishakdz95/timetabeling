@@ -25,6 +25,8 @@ class CreateSeancesTable extends Migration
             $table->string('cours_name');
             $table->unsignedBigInteger('set_id');
             $table->string('set_name');
+            $table->unsignedBigInteger('year_id');
+            $table->string('year_name');
             $table->string('type');
             $table->string('priority');
             $table->boolean('available');

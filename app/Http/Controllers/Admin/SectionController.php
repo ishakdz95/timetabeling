@@ -88,7 +88,7 @@ class SectionController extends Controller
      */
     public function destroy(section $section)
     {
-        $section->delete();
-        return redirect()->route('admin.sections.index');
+
+        return  $section->delete();
     }
 }

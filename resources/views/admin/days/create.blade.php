@@ -2,10 +2,10 @@
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
     <div class="card-body">
-        <h5 class="card-title">New Day</h5>
+        <h5 class="card-title text-site">New Day</h5>
                    <form method="POST" action="{{route('admin.days.store')}}">
                        @csrf
-                       <label >Name Of Day:</label>
+                       <label class="text-light" >Name Of Day:</label>
                        <select class="form-control" name="name">
                            <option value="Saturday">Saturday</option>
                            <option value="Sunday">Sunday</option>

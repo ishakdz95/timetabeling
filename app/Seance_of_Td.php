@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seance_of_Td extends Model
 {
-    protected $fillable=['cours_id','cours_name','group_id',
-        'group_name','type','available','priority'];
+    protected $fillable=['cours_id','cours_name','group_id','group_name',
+        'type','available','priority','year_id','year_name'];
 
     public function seances_of_tds(){
         $courses=Course::all();
@@ -22,6 +22,8 @@ class Seance_of_Td extends Model
                     if($cours->type=='TD'){
                         $group->courses()->syncWithoutDetaching($cours);
                         $seance_of_td=new Seance_of_Td();
+                        $seance_of_td->year_id=$cours->year->id;
+                        $seance_of_td->year_name=$cours->year->name;
                         $seance_of_td->cours_id=$cours->id;
                         $seance_of_td->cours_name=$cours->name;
                         $seance_of_td->group_id=$group->id;

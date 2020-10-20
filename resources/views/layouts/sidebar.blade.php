@@ -31,77 +31,97 @@
                             </button>
                         </span>
     </div>
-    <div class="scrollbar-sidebar">
-        <div class="app-sidebar__inner">
-            <ul class="vertical-nav-menu">
+    <div class="scrollbar-sidebar ">
+        <div class="app-sidebar__inner ">
+            <ul class="vertical-nav-menu ">
                 @guest
-                    <li class="list-group-item active nav-item" ><a  class="nav-link" href="#">{{ config('app.name', 'TimeTabeling') }}</a></li>
-                    <li class="list-group-item nav-item" >
-                        <a  class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    <li class="list-group-item active  nav-item" ><a  class="nav-link " href="#">{{ config('app.name', 'TimeTabeling') }}</a></li>
+                    <li class=" list-group-item nav-item bg-dark" >
+                        <a  class="nav-link text-light" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @if (Route::has('register'))
-                        <li  class=" list-group-item nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <li  class=" list-group-item nav-item bg-dark">
+                            <a class="nav-link text-light" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                     @endif
                 @else
-                    <li class="app-sidebar__heading">Dashboards</li>
+                    <li class="app-sidebar__heading text-light">resources</li>
                     <li>
                         <a href="{{ route('home') }}" class="mm-active">
-                            <i class="metismenu-icon pe-7s-rocket"></i>
+                            <i class="metismenu-icon pe-7s-rocket "></i>
                             Dashboard
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.days.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            days
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Days</div>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.timeslots.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Timeslots
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Timeslots</div>
+
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.rooms.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Rooms
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Rooms</div>
+
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.years.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Years
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Years</div>
+
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.sections.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Sections
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Sections</div>
+
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.groups.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Groups
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Groups</div>
+
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.courses.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Courses
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light">Courses</div>
+
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('admin.professors.index') }}">
-                            <i class="metismenu-icon pe-7s-display2"></i>
-                            Professors
+                            <i class="metismenu-icon pe-7s-display2 text-light"></i>
+                            <div class="text-light"><b>Professors</b></div>
+
                         </a>
                     </li>
-
-
+                    <li class="list-group-item nav-item dropdown bg-site">
+                        <a id="navbarDropdown" class="dropdown-toggle nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                 @endguest
 
             </ul>

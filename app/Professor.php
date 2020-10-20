@@ -29,12 +29,18 @@ class Professor extends Model
             $i++;
         }
 }
-  public function random_professor(){
-        $professors=Professor::all();
-        $random=rand(1,count($professors));
-        $professor=$professors->find($random);
-     return $professor;
 
-  }
+    public function random_professor04(Course $course){
+        $bool=true;
+       $professors=$course->professors->where('hour', '>', 0);
+        $count=count($professors);
+        $rand = rand(0, $count - 1);
+        $professor = $professors[$rand];
+        //if ($professor->hour > 0) {
+            return $professor;
+        //}
+        //return $professor;
+    }
+
 
 }

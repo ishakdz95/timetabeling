@@ -16,6 +16,8 @@ class SeanceWP extends Model
     public $cours_name='';
     public $set_id=0;
     public $set_name='';
+    public $year_id=0;
+    public $year_name='';
     public $type='';
     public $priority='';
     public $available=true;

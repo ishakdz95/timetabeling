@@ -19,6 +19,8 @@ class CreateSeanceOfTdsTable extends Migration
             $table->string('cours_name');
             $table->unsignedBigInteger('group_id');
             $table->string('group_name');
+            $table->unsignedBigInteger('year_id');
+            $table->string('year_name');
             $table->string('type');
             $table->string('priority');
             $table->boolean('available');

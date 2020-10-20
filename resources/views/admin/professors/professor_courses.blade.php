@@ -19,7 +19,13 @@
                 @endforeach
 
             </select>
-            <input  type="submit" value="submit" class="mt-1 btn btn-primary"/>
+            <label>Courses</label>
+            @foreach($professor->courses as $course)
+                <input class="form-control" value="{{$course->name}}"readonly><br>
+            @endforeach
+
+            <input  type="submit" value="attach" name="button_1" class="mt-1 btn btn-info"/>
+            <input  type="submit" value="detach" name="button_1" class="mt-1 btn btn-danger"/>
         </form>
     </div>
 @endsection

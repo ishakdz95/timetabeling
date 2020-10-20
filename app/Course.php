@@ -27,4 +27,8 @@ class Course extends Model
     {
         return $this->belongsToMany(Professor::class);
     }
+    public function getCourse(Seance $seance){
+        $course=Course::find($seance->cours_id);
+        return $course;
+    }
 }

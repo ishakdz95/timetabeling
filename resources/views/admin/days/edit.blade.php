@@ -2,11 +2,11 @@
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
     <div class="card-body">
-        <h5 class="card-title">New Course</h5>
+        <h5 class="card-title text-site">Edite:{{$day->name}}</h5>
                    <form method="POST" action="{{route('admin.days.update',$day->id)}}">
                        {{method_field('PUT')}}
                        @csrf
-                       <label >Day Name:</label>
+                       <label class="text-light">Day Name:</label>
                        <select class="form-control" name="name" value="{{$day->name}}">
                            <option value="{{$day->name}}">{{$day->name}}</option>
                        <option value="Saturday">Saturday</option>

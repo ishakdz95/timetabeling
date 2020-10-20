@@ -16,5 +16,9 @@ class Year extends Model
     public function sections(){
         return $this->hasMany(Section::class);
     }
+    public function getYear(int $year_id){
+        $year=Year::find($year_id);
+        return $year;
+    }
 
 }

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Seance_of_Section extends Model
 {
-    protected $fillable=['cours_id','cours_name','section_id',
-                        'section_name','type','available','priority'];
+    protected $fillable=['cours_id','cours_name','section_id','section_name',
+        'type','available','priority','year_id','year_name'];
 
 
     public function seances_of_sections(){
@@ -26,6 +26,8 @@ class Seance_of_Section extends Model
                             $group->courses()->syncWithoutDetaching($cours);
                         }
                         $seance_of_section=new Seance_of_Section();
+                        $seance_of_section->year_id=$cours->year->id;
+                        $seance_of_section->year_name=$cours->year->name;
                         $seance_of_section->cours_id=$cours->id;
                         $seance_of_section->cours_name=$cours->name;
                         $seance_of_section->section_id=$section->id;

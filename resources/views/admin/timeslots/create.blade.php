@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
 @section('main-section')
-    <div class="card-body"><h5 class="card-title">New Timeslot</h5>
+    <div class="card-body"><h5 class="card-title text-site">New Timeslot</h5>
                    <form method="POST" action="{{route('admin.timeslots.store')}}">
                        @csrf
-                       <label >Time Slot:</label>
+                       <label class="text-light" >Time Slot:</label>
                        <select class="form-control" name="name">
                            <option value="08:00-09:30">08:00-09:30</option>
                            <option value="09:30-11:00">09:30-11:00</option>
@@ -16,7 +16,7 @@
                        <div type="hidden">
                            <input type="hidden" id="available" name="available" value="1" >
                        </div>
-                       <label >Day:</label>
+                       <label class="text-light">Day:</label>
                         <select class="form-control " name="day_id">
                             @foreach($days as $day)
                                 <option value="{{$day->id}}">{{$day->name}}</option>

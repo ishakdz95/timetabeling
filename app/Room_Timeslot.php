@@ -37,4 +37,5 @@ class Room_Timeslot extends Model
             $rt->delete();
         }
     }
+
 }

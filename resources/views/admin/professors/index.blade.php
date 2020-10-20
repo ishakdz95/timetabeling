@@ -3,8 +3,8 @@
 @section('main-section')
     <div class="col-lg-10">
         <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title">Professors</h5>
+            <div class="card-body table-dark">
+                <h5 class="card-title text-site">Professors</h5>
 
                     <table class="table">
                         <tr>
@@ -15,7 +15,7 @@
                             <th >Sex</th>
                             <th >Edit</th>
                             <th >Delete</th>
-                            <th>Attache course to professor</th>
+                            <th>Professors courses</th>
                             <th>TimeTabeling</th>
                         </tr>
 
@@ -36,9 +36,9 @@
                                         {{ method_field('DELETE') }}
                                         <input type="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this professor?')" class="btn btn-danger"/>
                                     </form>
-                                    <td><a onclick='myFunction(  window.open("{{URL::to('professor_courses/'.$professor->id)}}","Ratting","width=800,height=800,left=150,top=200,toolbar=0,status=0,"))' class="mt-1 btn btn-warning">Add courses</a></td>
+                                    <td><a onclick='myFunction(  window.open("{{URL::to('professor_courses/'.$professor->id)}}","Ratting","width=800,height=800,left=150,top=200,toolbar=0,status=0,"))' class="mt-1 btn btn-warning">courses</a></td>
                                     <td >
-                                        <a href="#" class="mb-2 mr-2 btn btn-secondary">Timetabeling</a>
+                                        <a href="/admin/professor_timetabeling/{{$professor->id}}" class="mb-2 mr-2 btn btn-secondary">{{$professor->first_name}} {{$professor->last_name}} Timetabeling</a>
                                     </td>
                             </tr>
 

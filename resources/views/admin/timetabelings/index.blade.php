@@ -9,9 +9,6 @@
 
                 <div class="card-body">
                     <br><br><br>
-                    <a href="{{route('new_population')}}" class="btn btn-green">Make new generation</a>
-                    <a href="{{route('best_timetabeling')}}" class="btn btn-green">Best time tabel</a>
-                    <a href="{{route('final_timetabeling')}}" class="btn btn-green">Final time tabel</a>
                 </div>
             </div>
         </div>

@@ -36,6 +36,15 @@ class Timeslot extends Model
         return $this->belongsTo(Day::class);
     }
 
+    public function intial_timeslots(){
+        $timeslots=Timeslot::all();
+        $i=1;
+        foreach ($timeslots as $timeslot){
+            $timeslot->id=$i;
+            $i++;
+            $timeslot->save();
+        }
 
+    }
 
 }

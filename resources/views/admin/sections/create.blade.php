@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('main-section')
-    <div class="card-body"><h5 class="card-title">New Section</h5>
+    <div class="card-body"><h5 class="card-title text-site">New Section</h5>
                    <form method="POST" action="{{route('admin.sections.store')}}">
                        @csrf
-                       <label >Name Of Section:</label>
+                       <label class="text-light">Name Of Section:</label>
                        <input type="text" name="name" class="form-control" required/>
-                       <label >Year:</label>
-                       <select class="form-control " name="year_id">
+                       <label class="text-light" >Year:</label>
+                       <select class="form-control  " name="year_id">
                            @foreach($years as $year)
                                <option value="{{$year->id}}">{{$year->name}}</option>
                            @endforeach

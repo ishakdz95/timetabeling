@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-md-12">
             <div class="main-card mb-3 card">
-                <div class="card-header">Sections </div>
+
                 <div class="table-responsive">
-                    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                    <table class="align-middle mb-0 table table-borderless table-striped table-hover table-dark">
                         <thead>
                         <tr>
                             <th class="text-center">#</th>
@@ -32,7 +32,7 @@
                                 <a :href="'sections/'+section.id+'/edit/'" class="btn btn-info">Edit</a>
                             </td>
                             <td class="text-center">
-                                <button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm">Details</button>
+                                <button @click="destroy(section)" class="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                         </tbody>
@@ -48,6 +48,14 @@
         props : ['year'],
         created() {
             console.log(this.year)
+        },
+        methods : {
+            destroy(section){
+                axios.delete(`sections/${section.id}`).then(res =>{
+                    console.log('response from destroy',res)
+                    this.year.sections=this.year.sections.filter(sec => sec.id != section.id)
+                }).catch(err =>console.log('error',err))
+            }
         }
     }
 

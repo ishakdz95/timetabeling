@@ -20,6 +20,8 @@ class CreateSeanceOfSectionsTable extends Migration
             $table->string('cours_name');
             $table->unsignedBigInteger('section_id');
             $table->string('section_name');
+            $table->unsignedBigInteger('year_id');
+            $table->string('year_name');
             $table->string('type');
             $table->string('priority');
             $table->boolean('available');

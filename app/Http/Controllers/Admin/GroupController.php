@@ -18,8 +18,9 @@ class GroupController extends Controller
      */
     public function index()
     {
+        $years= Year::with('sections.groups')->get();
         $groups=Group::all();
-        return view('admin.groups.index',compact('groups'));
+        return view('admin.groups.index',compact('groups' , 'years'));
     }
 
     /**
@@ -90,7 +91,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        $group->delete();
-        return redirect()->route('admin.groups.index');
+//        dd($group);
+        return $group->delete();
     }
 }

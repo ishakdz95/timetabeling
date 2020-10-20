@@ -12,4 +12,5 @@ class Day extends Model
     {
         return $this->hasMany(Timeslot::class);
     }
+
 }

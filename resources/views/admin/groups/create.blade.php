@@ -2,13 +2,13 @@
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
     <div class="card-body">
-        <h5 class="card-title">New Group</h5>
+        <h5 class="card-title text-site">New Group</h5>
                    <form method="POST" action="{{route('admin.groups.store')}}">
                        @csrf
-                       <label >Name Of Group:</label>
+                       <label class="text-light">Name Of Group:</label>
                        <input type="form-control text" name="name" class="form-control" required/>
-                       <label >Section:</label>
-                       <select class="form-control " name="section_id">
+                       <label class="text-light">Section:</label>
+                       <select class="form-control " name="section_id" required>
                            @foreach($sections as $section)
                                <option value="{{$section->id}}">{{$section->name}}</option>
                            @endforeach

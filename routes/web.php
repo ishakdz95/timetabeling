@@ -43,9 +43,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function (){
     Route::resource('years','Admin\YearController');
     Route::resource('sections','Admin\SectionController');
 });
-Route::get('/new_population', 'Controller@new_population')->name('new_population');
-Route::get('/best_timetabeling', 'Controller@best_timetabeling')->name('best_timetabeling');
-Route::get('/final_timetabeling', 'Controller@final_timetabeling')->name('final_timetabeling');
-Route::get('/group_timetabeling/{id}', 'Controller@group_timetabeling')->name('group_timetabeling');
-Route::get('/professor_courses/{id}', 'Controller@professor_courses')->name('professor_courses');
-Route::get('/attache_professor_course', 'Controller@attache_professor_course')->name('attache_professor_course');
+Route::get('/new_population', 'Controller@new_population')->middleware(['auth'])->name('new_population');
+Route::get('/best_timetabeling', 'Controller@best_timetabeling')->middleware(['auth'])->name('best_timetabeling');
+Route::get('/final_timetabeling', 'Controller@final_timetabeling')->middleware(['auth'])->name('final_timetabeling');
+Route::get('/admin/group_timetabeling/{id}', 'Controller@group_timetabeling')->middleware(['auth'])->name('group_timetabeling');
+Route::get('/professor_courses/{id}', 'Controller@professor_courses')->middleware(['auth'])->name('professor_courses');
+Route::get('/attache_professor_course', 'Controller@attache_professor_course')->middleware(['auth'])->name('attache_professor_course');
+Route::get('/detache_professor_course', 'Controller@detache_professor_course')->middleware(['auth'])->name('detache_professor_course');
+Route::get('/admin/professor_timetabeling/{id}', 'Controller@professor_timetabeling')->middleware(['auth'])->name('professor_timetabeling');

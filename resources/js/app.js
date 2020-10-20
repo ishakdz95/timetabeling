@@ -26,6 +26,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('sections-component', require('./components/Sections.vue').default);
 Vue.component('timeslots-component', require('./components/Timeslots/index.vue').default);
 Vue.component('addbutton-component', require('./components/elements/addButton').default);
+Vue.component('groups-component', require('./components/Groups/index').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

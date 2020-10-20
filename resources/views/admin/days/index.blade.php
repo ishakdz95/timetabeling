@@ -1,14 +1,15 @@
 @extends('layouts.master')
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
-    <div class="col-lg-8">
-        <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title">Days</h5>
-                <table class="mb-0 table">
+    <div class="col-lg-8 ">
+        <div class="main-card mb-3 card ">
+            <div class="card-body table-dark">
+                <h5 class="card-title text-site">Days</h5>
+                <table class="mb-0 table ">
                         <tr>
                             <th >#</th>
                             <th >Nam of Day</th>
+                            <th >Timeslots of day</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -32,7 +33,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td class="text-light" colspan="2"> No Days Found.</td>
+                                <td  colspan="2" class="text-light"> No Days Found.</td>
                             </tr>
                         @endforelse
 
@@ -40,6 +41,6 @@
                 </div>
         </div>
 
-        <a href="{{route('admin.days.create')}} " class="mb-2 mr-2 btn btn-success">Add New</a>
+        <a href="{{route('admin.days.create')}} " class="mb-2 mr-2 btn btn-success ">Add New</a>
             </div>
 @endsection

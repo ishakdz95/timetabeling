@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h5 class="card-title text-site">Timeslots</h5>
         <multiselect
         v-model="selectedDay"
         :options="days"

@@ -3,8 +3,8 @@
 @section('main-section')
     <div class="col-lg-8">
         <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title">Years</h5>
+            <div class="card-body table-dark">
+                <h5 class="card-title text-site">Years</h5>
                 <br>
                     <table class="table">
                         <tr>
@@ -25,7 +25,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td class="text-light" colspan="2"> No Year Found.</td>
+                                <td colspan="2"> No Year Found.</td>
                             </tr>
                         @endforelse
                         </table>

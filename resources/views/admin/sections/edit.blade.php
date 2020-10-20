@@ -2,14 +2,14 @@
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
     <div class="card-body">
-        <h5 class="card-title">Edit Room</h5>
+        <h5 class="card-title text-site">Edit {{$section->name}}</h5>
                    <form method="POST" action="{{route('admin.sections.update',$section->id)}}">
                        {{method_field('PUT')}}
                        @csrf
-                       <label >Name Of Section:</label>
+                       <label class="text-light">Name Of Section:</label>
                        <input type="text" name="name" value="{{$section->name}}" class="form-control" required/>
-                       <label >Year :</label>
-                       <select class="form-control " name="day_id">
+                       <label class="text-light">Year :</label>
+                       <select class="form-control " name="day_id" required>
                            @foreach($years as $year)
                                <option value="{{$year->id}}">{{$year->name}}</option>
                            @endforeach

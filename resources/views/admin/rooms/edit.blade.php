@@ -2,15 +2,15 @@
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
     <div class="card-body">
-        <h5 class="card-title">Edit Room</h5>
+        <h5 class="card-title text-site">Edit  {{$room->code}}</h5>
                    <form method="POST" action="{{route('admin.rooms.update',$room->id)}}">
                        {{method_field('PUT')}}
                        @csrf
-                       <label >Code Of Room:</label>
+                       <label class="text-light">Code Of Room:</label>
                        <input type="text" name="code" value="{{$room->code}}" class="form-control" required/>
                        <br/>
-                       <label >Type Of Room:</label>
-                       <select class="form-control" name="type">
+                       <label  class="text-light">Type Of Room:</label>
+                       <select class="form-control" name="type" required>
                            <option value="{{$room->type}}">{{$room->type}}</option>
                            <option value="Cours">lecture hall</option>
                            <option value="TD">TD room</option>

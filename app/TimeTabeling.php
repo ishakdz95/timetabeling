@@ -33,12 +33,7 @@ class TimeTabeling extends Model
         }
          }
 
-    public function delete_seance(){
-        $seances=Seance::all();
-        foreach ($seances as $seance){
-            $seance->delete();
-        }
-    }
+
     public function make_section_seance_without_professor(){
         $seances_of_sections=Seance_of_Section::all();
         $rooms_timeslots=Room_Timeslot::all();
@@ -61,6 +56,8 @@ class TimeTabeling extends Model
                                 $seance->room_name = $rt->room_name;
                                 $seance->cours_id = $ss->cours_id;
                                 $seance->cours_name = $ss->cours_name;
+                                $seance->year_id = $ss->year_id;
+                                $seance->year_name = $ss->year_name;
                                 $seance->priority = $ss->priority;
                                 $seance->set_id = $ss->section_id;
                                 $seance->set_name = $ss->section_name;
@@ -107,6 +104,8 @@ class TimeTabeling extends Model
                                 $seance->room_name=$rt->room_name;
                                 $seance->cours_id=$st->cours_id;
                                 $seance->cours_name=$st->cours_name;
+                                $seance->year_id = $st->year_id;
+                                $seance->year_name = $st->year_name;
                                 $seance->priority = $st->priority;
                                 $seance->set_id=$st->group_id;
                                 $seance->set_name=$st->group_name;
@@ -159,20 +158,5 @@ class TimeTabeling extends Model
             $professor->save();
         }
     }
-    public function random_professor(){
-        $bool=true;
-        while($bool==true) {
-            $professors = Professor::all();
-            $count = count($professors);
-            $rand = rand(0, $count - 1);
-            $professor = $professors[$rand];
-            if ($professor->hour > 0) {
-                /*$professor->hour = $professor->hour - 1;
-                $professor->save();*/
-                $bool = false;
-                return $professor;
-            }
-        }
 
-    }
 }

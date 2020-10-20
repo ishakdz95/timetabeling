@@ -3,8 +3,8 @@
 @section('main-section')
     <div class="col-lg-8">
         <div class="main-card mb-3 card">
-            <div class="card-body">
-                <h5 class="card-title">Rooms</h5>
+            <div class="card-body table-dark">
+                <h5 class="card-title text-site">Rooms</h5>
 
                 <table class="mb-0 table">
                     <thead>
