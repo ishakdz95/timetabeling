@@ -11,13 +11,9 @@ class TimeTabeling extends Model
         '$professor_last_name','cours_id','priority','cours_name','set_id',
         'set_name','type','available','fitness'];
     public function dettach_timeslots(){
-         $rooms=Room::all();
-            foreach ($rooms as $room){
-               $room->timeslots()->detach();
-             }
-        $professros=Professor::all();
-        foreach ($professros as $professor){
-            $professor->timeslots()->detach();
+        $rooms=Room::all();
+        foreach ($rooms as $room){
+            $room->timeslots()->detach();
         }
         $groups=Group::all();
         foreach ($groups as $group){
@@ -31,7 +27,13 @@ class TimeTabeling extends Model
         foreach ($courses as $cours){
             $cours->timeslots()->detach();
         }
-         }
+    }
+    public function dettach_professor_timeslots(){
+        $professros=Professor::all();
+        foreach ($professros as $professor){
+            $professor->timeslots()->detach();
+        }
+    }
 
 
     public function make_section_seance_without_professor(){

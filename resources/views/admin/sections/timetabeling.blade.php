@@ -4,7 +4,7 @@
     <div class="col-lg-10">
         <div class="main-card mb-3 card">
             <div class="card-body table-dark">
-                <h5 class="card-title text-site">Group Timetable</h5>
+                <h5 class="card-title text-site">Section Timetabele</h5>
                 <table class="table_site">
                     <tr>
                         <td>Day/Time</td>
@@ -24,7 +24,7 @@
                         @foreach($item as $value)
                            <td>
                                {{$value->cours_name}}<br>
-                               {{$value->section_name}}<br>
+                               {{$value->set_name}}<br>
                                {{$value->room_name}}<br>
                                {{$value->professor_first_name}}
                                {{$value->professor_last_name}}
@@ -32,6 +32,10 @@
                         @endforeach
                         </tr>
                     @endforeach
+
+
+
+
 
 </table>
 

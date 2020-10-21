@@ -37,6 +37,7 @@ class Controller extends BaseController
         $room_timeslot=new Room_Timeslot();
         $seance=new Seance();
         $timetabling=new TimeTabeling();
+        $timetabling->dettach_timeslots();
         $room_timeslot->delete_rooms_timeslots();
         $room_timeslot->rooms_timeslots();
         $seance_of_section->delete_seance_of_section();
@@ -62,28 +63,19 @@ class Controller extends BaseController
     }
     public function best_timetabeling(){
         $table = new Table();
-        $average=$table->fitness_averege();
-        if ($average==0){
-            $this->final_timetabeling();
-        }
-        else{
-            for ($j=0;$j<10;$j++){
-                $table->intial_timetabelings();
-                for($i=0;$i<10;$i++){
+            //for ($j=0;$j<10;$j++){
+              //  $table->intial_timetabelings();
+                for($i=0;$i<5;$i++){
                     $average=$table->fitness_averege();
-                    if ($average==0){
-                        $this->final_timetabeling();
-                    }
                     $table->delete_bad_timetabeling($average);
                     $arr01=$table->semi_chromosome();
                     $arr02=$table->semi_chromosome02();
                     $chromosome=array_merge($arr01,$arr02);
+                    //$inversion_chromosome=$table->mutation($chromosome);
                     $fit = $table->fitness_function($chromosome);
                     $table->save_new_chromosome($chromosome,$fit);
-                }
+                //}
             }
-        }
-
         return redirect()->route('admin.timetabelings.index');
     }
     public function final_timetabeling(){
@@ -140,6 +132,20 @@ class Controller extends BaseController
         $array=$table->matrice($professor_timetable,$array);
 
         return view('admin.professors.timetabeling',compact('array','days','day_first'));
+    }
+    public function section_timetabeling(int $id){
+        $professors=Professor::all();
+        $days=Day::all();
+        $day_first=Day::first();
+        $table=new Table();
+        $table->delete_unavailable_timetabeling();
+        $arr=$table->return_best_timetabeling();
+        $array=$table->order($arr);
+        $section_timetable=$table->return_section_timetabeling($id,$array);
+        $array=$table->empty_matrice();
+        //$array=$table->matrice_of_timetabelings($arr);
+        $array=$table->matrice($section_timetable,$array);
+        return view('admin.sections.timetabeling',compact('array','days','day_first'));
     }
     public function professor_courses(int $id){
         $professor=Professor::find($id);

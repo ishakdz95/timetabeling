@@ -13,6 +13,7 @@
                             <th class="text-center">Year</th>
                             <th class="text-center">Edit</th>
                             <th class="text-center">Delete</th>
+                            <th class="text-center">Timetabeling</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,9 @@
                             </td>
                             <td class="text-center">
                                 <button @click="destroy(section)" class="btn btn-danger">Delete</button>
+                            </td>
+                            <td>
+                                <a :href="'section_timetabeling/'+section.id"  onclick='myFunction(window.open("","Ratting","width=800,height=800,left=150,top=200,toolbar=0,status=0,"))' class="btn btn-dark">Timetabeling</a>
                             </td>
                         </tr>
                         </tbody>

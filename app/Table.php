@@ -13,7 +13,7 @@ class Table extends Model
         $Professor=new Professor();
         $Course=new Course();
         $timetabling->intial_professor_hour();
-        $timetabling->dettach_timeslots();
+        $timetabling->dettach_professor_timeslots();
         $seances=Seance::all();
         $count=count($seances);
         while ($count>0) {
@@ -124,14 +124,22 @@ class Table extends Model
         return $average;
     }
     public function delete_bad_timetabeling(int $average){
-      $timetabelings=TimeTabeling::all();
+    $timetabelings=TimeTabeling::all();
 
-      foreach ($timetabelings as $timetabeling){
-          if (($timetabeling->fitness)>$average && $average>0){
-
-              $timetabeling->delete();
-          }
-      }
+    foreach ($timetabelings as $timetabeling){
+        if (($timetabeling->fitness)>$average && $average>0){
+            $timetabeling->delete();
+        }
+    }
+}
+    public function delete_bad_fitnesses(int $average){
+        $timetabelings=TimeTabeling::all();
+        $fitnesses=Fitness::all();
+        foreach ($fitnesses as $fitness){
+            if ($fitness->fitness>$average ){
+                $fitness->delete();
+            }
+        }
     }
     public function crossing(array $arr1,array $arr2){
         $timetabelings=TimeTabeling::all();
@@ -196,6 +204,39 @@ class Table extends Model
         }
         return $array02;
     }
+    public function mutation(array $chromosome){
+        $table=new Table();
+        $bool=true;
+        $array02=array();
+        $i=0;
+        while ($bool==true){
+            $count=count($chromosome);
+            $rand01=rand(0,$count-1);
+            $rand02=rand(0,$count-1);
+            $gene01=$this->gene($chromosome,$rand01);
+            $gene02=$this->gene($chromosome,$rand02);
+            if ($gene01->type==$gene02->type){
+                $arr=$chromosome[$rand01];
+                $chromosome[$rand01]->cours_id=$gene02->cours_id;
+                $chromosome[$rand01]->cours_name=$gene02->cours_name;
+                $chromosome[$rand01]->set_id=$gene02->set_id;
+                $chromosome[$rand01]->set_name=$gene02->set_name;
+                $chromosome[$rand01]->professor_id=$gene02->cours_id;
+                $chromosome[$rand01]->cours_name=$gene02->cours_name;
+                dump($chromosome[$rand01]->cours_id);
+                dd($chromosome[$rand01]->cours_name);
+                dump($arr->cours_name);
+                $arr->cours_name=$gene02->cours_name;
+                dump($arr->cours_name);
+                dump($gene01);
+                dd($gene02);
+
+            }
+
+        }
+        return $array02;
+    }
+
     public function matrice(array $timetable,array $array){
         $days=Day::all();
         $group_timetable=$array;
@@ -402,6 +443,49 @@ public function delete_unavailable_timetabeling(){
         }
         return $array;
     }
+    public function return_section_timetabeling(int $section_id,array $arr)
+    {
+        $sections = Section::all();
+        $array = [];
+        $i = 0;
+        foreach ($arr as $item) {
+            $seance_of_group = new Seance_of_group();
+            if ($item->type=="Cours"){
+            if ($item->set_id == $section_id) {
+                    $seance_of_group->day_id=$item->day_id;
+                    $seance_of_group->day_name=$item->day_name;
+                    $seance_of_group->timeslot_id=$item->timeslot_id;
+                    $seance_of_group->timeslot_name=$item->timeslot_name;
+                    $seance_of_group->professor_id=$item->professor_id;
+                    $seance_of_group->professor_first_name=$item->professor_first_name;
+                    $seance_of_group->professor_last_name=$item->professor_last_name;
+                    $seance_of_group->section_id=$item->set_id;
+                    $seance_of_group->section_name=$item->set_name;
+                    $seance_of_group->cours_id=$item->cours_id;
+                    $seance_of_group->cours_name=$item->cours_name;
+                    $seance_of_group->room_id=$item->room_id;
+                    $seance_of_group->room_name=$item->room_name;
+                    $seance_of_group->type=$item->type;
+                    $array[$i]=$seance_of_group;
+                    $i++;
+                }
 
+            }
+        }
+        return $array;
+    }
+    public function gene(array $chromosome,int $rand){
+        $gene01=$chromosome[$rand];
+        $gene=new Gene();
+        $gene->cours_id=$gene01->cours_id;
+        $gene->cours_name=$gene01->cours_name;
+        $gene->set_id=$gene01->set_id;
+        $gene->set_name=$gene01->set_name;
+        $gene->professor_id=$gene01->professor_id;
+        $gene->professor_first_name=$gene01->professor_first_name;
+        $gene->professor_last_name=$gene01->professor_last_name;
+        $gene->type=$gene01->type;
+        return $gene;
 
+    }
 }

@@ -59,6 +59,7 @@
                     </button>
                 </span>
         </div>
+        @if(auth::user()!=null)
         <div class="app-header__content">
             <div class="app-header-left">
                 <div class="search-wrapper">
@@ -68,30 +69,54 @@
                     </div>
                     <button class="close"></button>
                 </div>
+
+                <div class=" col-lg-auto">
                 <ul class="header-menu nav">
-                    <li class="nav-item">
-                        <a href="{{route('new_population')}}" class="nav-link">
-                            <i class="nav-link-icon fa fa-database"> </i>
-                            <div class="text-light">Make new population</div>
-                        </a>
-                    </li>
-                    <li class="btn-group nav-item">
-                        <a href="{{route('best_timetabeling')}}" class="nav-link">
-                            <i class="nav-link-icon fa fa-edit"></i>
-                            <div class="text-light"> Best timetables</div>
-                        </a>
-                    </li>
-                    <li class="dropdown nav-item">
-                        <a href="{{route('final_timetabeling')}}" class="nav-link">
-                            <i class="nav-link-icon fa fa-cog"></i>
-                            <div class="text-light">final timetable</div>
-                        </a>
-                    </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('new_population')}}" class="nav-link">
+                                <i class="nav-link-icon fa fa-database"> </i>
+                                <div class="text-light">Make new population</div>
+                            </a>
+                        </li>
+
+                        <li class="btn-group nav-item">
+                            <a href="{{route('best_timetabeling')}}" class="nav-link">
+                                <i class="nav-link-icon fa fa-edit"></i>
+                                <div class="text-light"> Best timetables</div>
+                            </a>
+                        </li>
+                        <li class="dropdown nav-item">
+                            <a href="{{route('final_timetabeling')}}" class="nav-link">
+                                <i class="nav-link-icon fa fa-cog"></i>
+                                <div class="text-light">final timetable</div>
+                            </a>
+                        </li>
+
                 </ul>
+
+            </div>
             </div>
             <div class="app-header-right">
+
+                <div class="list-group-item nav-item dropdown bg-site">
+                    <a id="navbarDropdown" class="dropdown-toggle nav-link text-white "  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+                    <div  id="logout" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item nav-link" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
+        @endif
     </div>
     <div class="ui-theme-settings">
         <button type="button" id="TooltipDemo" class="btn-open-options btn btn-success">
@@ -469,9 +494,17 @@
 
     </div>
 </div>
-<script  src="{{ asset('js/app.js')}}"></script>
-<script type="text/javascript" src="{{ asset('assets/scripts/main.js')}}"></script>
+<script>
 
+</script>
+
+<script type="text/javascript" src="{{ asset('assets/scripts/main.js')}}"></script>
+<script  src="{{ asset('js/app.js')}}"></script>
+<script>
+    $("#navbarDropdown").click(function () {
+        $("#logout").toggle();
+    })
+</script>
 </body>
 </html>
 
