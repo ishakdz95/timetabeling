@@ -41,11 +41,10 @@ class TimeTabeling extends Model
         $rooms_timeslots=Room_Timeslot::all();
         $sections=section::all();
         $timeslots=Timeslot::all();
+        $room_timeslot=new Room_Timeslot();
         foreach ($seances_of_sections as $ss){
-            foreach ($rooms_timeslots as $rt){
+            $rt=$room_timeslot->get_random_room_timeslot($ss->type);
                 if ($ss->available==true){
-                    if ($rt->available==true){
-                        if ($ss->type==$rt->type){
                             $timeslot=$timeslots->find($rt->timeslot_id);
                             $section=$sections->find($ss->section_id);
                             if($section->timeslots()->find($rt->timeslot_id)==null) {
@@ -73,27 +72,22 @@ class TimeTabeling extends Model
                                 }
                                 $seance->save();
                                 $ss->available = false;
-                                $rt->available = false;
                                 $ss->save();
-                                $rt->save();
                             }
                         }
                     }
                 }
-            }
-        }
-    }
+
     public function make_td_seance_without_professor(){
         $seances_of_tds=Seance_of_Td::all();
         $rooms_timeslots=Room_Timeslot::all();
         $groups=Group::all();
         $sections=section::all();
         $timeslots=Timeslot::all();
+        $room_timeslot=new Room_Timeslot();
         foreach ($seances_of_tds as $st){
-            foreach ($rooms_timeslots as $rt){
+            $rt=$room_timeslot->get_random_room_timeslot($st->type);
                 if ($st->available==true){
-                    if ($rt->available==true){
-                        if ($st->type==$rt->type){
                             $timeslot=$timeslots->find($rt->timeslot_id);
                             $group=$groups->find($st->group_id);
                             if($group->timeslots()->find($rt->timeslot_id)==null){
@@ -117,14 +111,7 @@ class TimeTabeling extends Model
                                 $group->timeslots()->attach($timeslot);
                                 $seance->save();
                                 $st->available=false;
-                                $rt->available=false;
                                 $st->save();
-                                $rt->save();
-
-                            }
-
-                        }
-                    }
                 }
             }
         }

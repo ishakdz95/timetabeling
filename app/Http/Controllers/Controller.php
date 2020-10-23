@@ -40,6 +40,7 @@ class Controller extends BaseController
         $timetabling->dettach_timeslots();
         $room_timeslot->delete_rooms_timeslots();
         $room_timeslot->rooms_timeslots();
+
         $seance_of_section->delete_seance_of_section();
         $seance_of_td->delete_seance_of_tds();
         $seance_of_section->seances_of_sections();

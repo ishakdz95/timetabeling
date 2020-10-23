@@ -14,6 +14,7 @@
                     @endif
 
                     <p >Welcome to timetabeling generator</p>
+                        <p >Welcome to timetabeling generator</p>
                 </div>
             </div>
         </div>

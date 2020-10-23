@@ -4,9 +4,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="text-light card-header">Time Tabeling</div>
+                <div class="text-light card-header bg-dark">Time Tabeling generator</div>
 
-                <div class="card-body">
+                <div class="card-body table-dark">
                     <br><br><br>
                 </div>
             </div>

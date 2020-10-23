@@ -14,8 +14,8 @@ class Room_Timeslot extends Model
         $timeslots=Timeslot::all();
         $rooms_timeslots=array();
         $i=0;
-        foreach ($rooms as $room){
-            foreach ($timeslots as $timeslot){
+        foreach ($timeslots as $timeslot){
+            foreach ($rooms as $room){
                 $room->timeslots()->attach($timeslot);
                 $room_timeslot=new Room_Timeslot();
                 $room_timeslot->day_id=$timeslot->day->id;
@@ -36,6 +36,15 @@ class Room_Timeslot extends Model
         foreach ($rooms_timeslots as $rt){
             $rt->delete();
         }
+    }
+    public function get_random_room_timeslot($type){
+        $rooms_timeslots=Room_Timeslot::where("available","=",true)->where("type","=",$type)->get();
+        $count=count($rooms_timeslots);
+        $rand=rand(0,$count);
+        $room_timeslot=$rooms_timeslots[$rand];
+        $room_timeslot->available=false;
+        $room_timeslot->save();
+        return $room_timeslot;
     }
 
 }
