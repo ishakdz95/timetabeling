@@ -19,7 +19,7 @@ class Seance_of_Td extends Model
                 $cours_year=$cours->year->name;
                 $cours_type=$cours->type;
                 if($year==$cours_year){
-                    if($cours->type=='TD'){
+                    if($cours->type!='Cours'){
                         $group->courses()->syncWithoutDetaching($cours);
                         $seance_of_td=new Seance_of_Td();
                         $seance_of_td->year_id=$cours->year->id;

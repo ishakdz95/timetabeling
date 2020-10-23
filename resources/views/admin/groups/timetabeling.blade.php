@@ -4,7 +4,7 @@
     <div class="col-lg-10">
         <div class="main-card mb-3 card">
             <div class="card-body table-dark">
-                <h5 class="card-title text-site">Group Timetable</h5>
+                <h5 class="card-title text-site">{{\App\Group::find(Request::segment(3))->section->year->name}},{{\App\Group::find(Request::segment(3))->section->name}},{{\App\Group::find(Request::segment(3))->name}}: Timetable</h5>
                 <table class="table_site">
                     <tr>
                         <td>Day/Time</td>

@@ -4,7 +4,8 @@
     <div class="col-lg-10">
         <div class="main-card mb-3 card">
             <div class="card-body table-dark">
-                <h5 class="card-title text-site">Section Timetabele</h5>
+
+                <h5 class="card-title text-site">{{\App\section::find(Request::segment(3))->year->name}},{{\App\section::find(Request::segment(3))->name}}: Timetabele</h5>
                 <table class="table_site">
                     <tr>
                         <td>Day/Time</td>

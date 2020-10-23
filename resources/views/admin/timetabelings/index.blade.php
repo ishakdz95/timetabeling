@@ -1,5 +1,6 @@
-@extends('layouts.app3')
-@section('content')
+@extends('layouts.master')
+{{-- the sidebare is rendred in the master.blade.php --}}
+@section('main-section')
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

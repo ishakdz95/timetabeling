@@ -4,7 +4,7 @@
     <div class="col-lg-10">
         <div class="main-card mb-3 card">
             <div class="card-body table-dark">
-                <h5 class="card-title text-site">Professor Timetabeling</h5>
+                <h5 class="card-title text-site">{{\App\Professor::find(Request::segment(3))->last_name}} {{\App\Professor::find(Request::segment(3))->first_name}}: Timetabeling</h5>
                 <table class="table_site">
                     <tr>
                         <td>Day/Time</td>

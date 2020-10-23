@@ -8,6 +8,7 @@
 
                     <table class="table">
                         <tr>
+                            <th>#</th>
                             <th>First name</th>
                             <th >Last name</th>
                             <th >Grade</th>
@@ -21,6 +22,7 @@
 
                         @forelse($professors as $professor)
                             <tr>
+                                <td >{{$professor->id}}</td>
                                 <td >{{$professor->first_name}}</td>
                                 <td >{{$professor->last_name}}</td>
                                 <td >{{$professor->grade}}</td>

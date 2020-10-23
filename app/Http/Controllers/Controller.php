@@ -51,10 +51,10 @@ class Controller extends BaseController
             $seance->initial_seance();
             $table->make_random_timetabeling();
         }
-
         $table->intial_timetabelings();
+
         for ($i = 0; $i < 10; $i++) {
-            $arr = $table->return_one_timetabeling();
+            $arr = $table->return_one_timetabeling02();
             $fit = $table->fitness_function($arr);
             $table->change_fitness($fit, $arr);
         }
@@ -86,20 +86,14 @@ class Controller extends BaseController
         $j=0;
         $table=new Table();
         $table->make_available_false();
+        $timetabelings=TimeTabeling::where("fitness","=",0)->take($count)->get();
         foreach ($timetabelings as $timetabeling){
-            if ($timetabeling->fitness==0){
-                $i=$timetabeling->id-1;
-                while($count>0){
-                    $arr[$j]=$timetabelings[$i];
-                    $timetabelings[$i]->available=true;
-                    $timetabelings[$i]->save();
-                    $i++;
+                    $arr[$j]=$timetabeling;
+                    $timetabeling->available=true;
+                    $timetabeling->save();
                     $j++;
-                    $count--;
-                }
-
-            }
         }
+        $table->delete_unavailable_timetabeling();
         return redirect()->route('admin.timetabelings.index');
 
     }
@@ -107,10 +101,10 @@ class Controller extends BaseController
         $groups=Group::all();
         $days=Day::all();
         $day_first=Day::first();
+        $timetabelings=TimeTabeling::get()->toArray();
         $table=new Table();
-        $table->delete_unavailable_timetabeling();
-        $arr=$table->return_best_timetabeling();
-        $array=$table->order($arr);
+       // $table->intial_timetabelings_id();
+        $array=$table->order($timetabelings);
         $group_timetable=$table->return_group_timetabeling($id,$array);
         $array=$table->empty_matrice();
         //$array=$table->matrice_of_timetabelings($arr);
@@ -123,9 +117,8 @@ class Controller extends BaseController
         $days=Day::all();
         $day_first=Day::first();
         $table=new Table();
-        $table->delete_unavailable_timetabeling();
-        $arr=$table->return_best_timetabeling();
-        $array=$table->order($arr);
+        $timetabelings=TimeTabeling::get()->toArray();
+        $array=$table->order($timetabelings);
         $professor_timetable=$table->return_professor_timetabeling($id,$array);
         $array=$table->empty_matrice();
         //$array=$table->matrice_of_timetabelings($arr);
@@ -138,9 +131,8 @@ class Controller extends BaseController
         $days=Day::all();
         $day_first=Day::first();
         $table=new Table();
-        $table->delete_unavailable_timetabeling();
-        $arr=$table->return_best_timetabeling();
-        $array=$table->order($arr);
+        $timetabelings=TimeTabeling::get()->toArray();
+        $array=$table->order($timetabelings);
         $section_timetable=$table->return_section_timetabeling($id,$array);
         $array=$table->empty_matrice();
         //$array=$table->matrice_of_timetabelings($arr);

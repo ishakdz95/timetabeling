@@ -30,6 +30,7 @@ class CreateTimeTabelingsTable extends Migration
             $table->string('set_name');
             $table->string('type');
             $table->boolean('available');
+            $table->boolean('already_crossing')->default(true);
             $table->unsignedBigInteger('fitness');
             $table->timestamps();
         });

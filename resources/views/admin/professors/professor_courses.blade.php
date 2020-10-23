@@ -2,7 +2,7 @@
 {{-- the sidebare is rendred in the master.blade.php --}}
 @section('main-section')
     <div class="card-body">
-        <h5 class="card-title">New Professor</h5>
+        <h5 class="card-title text-site">Attache courses to Professor {{$professor->last_name}} {{$professor->first_name}}</h5>
         <form method="GET" action="{{route('attache_professor_course')}}">
             @csrf
             <input type="hidden" name="id" value="{{$professor->id}}">
@@ -12,14 +12,15 @@
             <input name="first_name" value="{{$professor->sex}}" class="form-control" readonly><br>
             <br/>
 
-            <label >Select a course:</label>
+            <label class="text-light">Select a course:</label>
             <select class="form-control " name="course_id">
                 @foreach($courses as $course)
                     <option value="{{$course->id}}">{{$course->name}}</option>
                 @endforeach
 
             </select>
-            <label>Courses</label>
+            <br>
+            <label class="text-light">Courses already attached</label>
             @foreach($professor->courses as $course)
                 <input class="form-control" value="{{$course->name}}"readonly><br>
             @endforeach
